@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using S7;
 
 namespace RecipeLoader
 {
@@ -37,3 +38,39 @@ namespace RecipeLoader
         }
     }
 }
+//public partial class Form1 : Form
+//{
+//    CpuType MyCpuType = S7.Net.CpuType.S71500;
+//    String MyCpuIp = "10.10.10.98";
+//    short MyCpuRack = 0;
+//    short MyCpuSlot = 1;
+//    Plc plc;
+//    ErrorCode connectionResult;
+
+//    public Form1()
+//    {
+//        InitializeComponent();
+//        plc = new Plc(MyCpuType, MyCpuIp, MyCpuRack, MyCpuSlot);
+//    }
+
+//    private void button1_Click(object sender, EventArgs e)
+//    {
+//        connectionResult = plc.Open();
+//        if (plc.IsConnected)
+//        {
+//            bool myBool = (bool)plc.Read("DB1000.DBX0.0");
+
+//            MessageBox.Show("Считано значение DB1000.DBX0.0 " + myBool.ToString() + "\n"
+//                + "Запишем значение " + (!myBool).ToString()
+//                );
+//            if (myBool)
+//                plc.Write("DB1000.DBX0.0", 0);
+//            else
+//                plc.Write("DB1000.DBX0.0", 1);
+//        }
+//        else
+//            MessageBox.Show(connectionResult.ToString() + "Подключение к ПЛК не удалось");
+//        plc.Close();
+
+//    }
+//}
