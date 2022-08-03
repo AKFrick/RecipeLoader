@@ -96,7 +96,7 @@ namespace RecipeLoader
                 settings = value;
             }
         }
-        string XMLFileName = "settings.xml";
+        string XMLFileName = "res/settings.xml";
         XmlSerializer ser = new XmlSerializer(typeof(AppSettings));
 
         public void Load()
