@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using S7;
+using S7.Net;
 
 namespace RecipeLoader
 {
@@ -10,7 +11,11 @@ namespace RecipeLoader
     {
         public Action<string> Notify { get; set; }
         public int ArrayDim1 { get; private set; }
-        public int ArrayDim2 { get; private set; }
+        public int ArrayDim2 { get; private set; }  
+                
+
+        CpuType MyCpuType = S7.Net.CpuType.S71500;
+
         public PLCDataLoader(int arrayDim1, int arrayDim2)
         {
             ArrayDim1 = arrayDim1;
