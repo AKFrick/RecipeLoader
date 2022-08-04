@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace RecipeLoader
 {
@@ -13,8 +14,6 @@ namespace RecipeLoader
     {
         AppSettingsLoader settingsLoader;
         ToolDictionaryLoader toolLoader;
-        PLCDataLoader plcLoader;
-        RecipeParser parser;
         public Form1()
         {            
             InitializeComponent();
@@ -60,21 +59,37 @@ namespace RecipeLoader
         void ParseFile(string filename)
         {
             Notify?.Invoke("***********************************************************");
-            parser = new RecipeParser(toolLoader.Tools);
+            RecipeParser parser = new RecipeParser(toolLoader.Tools);
             parser.Notify += Notify;
+            RecipeData recipe = parser.Parse(filename);
+
+            BtnOpenRecipe.Enabled = false;
+            Thread thread = new Thread(() => loadToPlc(recipe));
+            thread.IsBackground = true;
+            thread.Start();
+
+            Notify?.Invoke("***********************************************************");
+        }
+
+
+        void loadToPlc(RecipeData recipe)
+        {
             try
             {
-                plcLoader = new PLCDataLoader(settingsLoader.Settings.ArrayDim1, settingsLoader.Settings.ArrayDim2);
+                PLCDataLoader plcLoader = new PLCDataLoader(settingsLoader.Settings.ArrayDim1, settingsLoader.Settings.ArrayDim2);
                 plcLoader.Notify += Notify;
-                plcLoader.LoadRecipe(parser.Parse(filename));
+                plcLoader.LoadRecipe(recipe);
             }
             catch (Exception e)
-            {                
+            {
                 Notify?.Invoke(e.Message);
             }
-            Notify?.Invoke("***********************************************************");
+            Invoke(new Action(() =>
+                {
+                    BtnOpenRecipe.Enabled = true;
+                }));
+        }          
 
-        }
         public Action<string> Notify { get; set; }
         void loadSettings()
         {

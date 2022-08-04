@@ -18,8 +18,21 @@ namespace RecipeLoader
         }
         public void WriteLine(string line)
         {
-            tbOutput.AppendText($"{DateTime.Now}: {line} \r\n");
-            tbOutput.ScrollToCaret();
+            //Потокобезопасная запись в текстбокс.
+            if(tbOutput.InvokeRequired)
+            {
+                Action safeWrite = delegate
+                {
+                    tbOutput.AppendText($"{DateTime.Now}: {line} \r\n");
+                    tbOutput.ScrollToCaret();
+                };
+                tbOutput.Invoke(safeWrite);
+            }
+            else
+            {
+                tbOutput.AppendText($"{DateTime.Now}: {line} \r\n");
+                tbOutput.ScrollToCaret();
+            }            
         }
     }
 }
