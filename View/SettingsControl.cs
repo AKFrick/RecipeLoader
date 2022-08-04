@@ -26,9 +26,9 @@ namespace RecipeLoader
                 if (value != null)
                 {
                     settings = value;
-                    tbIP.Text = settings.PLCIp;
-                    tbArrayDim1.Text = settings.ArrayDim1.ToString();
-                    tbArrayDim2.Text = settings.ArrayDim2.ToString();
+                    tbIP.Text = settings.Plc.Ip;
+                    tbArrayDim1.Text = settings.Plc.MaxNumberOfComponents.ToString();
+                    tbArrayDim2.Text = settings.Plc.MaxToolsInComponent.ToString();
                 }
             }
         }
@@ -41,9 +41,9 @@ namespace RecipeLoader
         {
             try
             {
-                settings.PLCIp = tbIP.Text;
-                settings.ArrayDim1 = short.Parse(tbArrayDim1.Text);
-                settings.ArrayDim2 = short.Parse(tbArrayDim2.Text);
+                settings.Plc.Ip = tbIP.Text;
+                settings.Plc.MaxNumberOfComponents = short.Parse(tbArrayDim1.Text);
+                settings.Plc.MaxToolsInComponent = short.Parse(tbArrayDim2.Text);
             }
             catch (Exception ex)
             {

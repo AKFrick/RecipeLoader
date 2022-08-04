@@ -13,7 +13,7 @@ namespace RecipeLoader
     public partial class Form1 : Form, INotifiable
     {
         AppSettingsLoader settingsLoader;
-        ToolDictionaryLoader toolLoader;
+        ToolDictionary tools;
         public Form1()
         {            
             InitializeComponent();
@@ -30,7 +30,6 @@ namespace RecipeLoader
             FormClosing += Form1_FormClosing;
 
             loadSettings();
-            loadTools(); 
         }
         private void OpenFileDialog(object sender, EventArgs e)
         {
@@ -51,24 +50,29 @@ namespace RecipeLoader
             };
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                loadTools();
+            {                
                 ParseFile(openFileDialog1.FileName);
             }
         }
         void ParseFile(string filename)
         {
             Notify?.Invoke("***********************************************************");
-            RecipeParser parser = new RecipeParser(toolLoader.Tools);
-            parser.Notify += Notify;
-            RecipeData recipe = parser.Parse(filename);
+            try
+            {
+                ToolDictionary tools = loadTools();
+                RecipeParser parser = new RecipeParser(tools);
+                parser.Notify += Notify;
+                RecipeData recipe = parser.Parse(filename);
 
-            BtnOpenRecipe.Enabled = false;
-            Thread thread = new Thread(() => loadToPlc(recipe));
-            thread.IsBackground = true;
-            thread.Start();
-
-            Notify?.Invoke("***********************************************************");
+                BtnOpenRecipe.Enabled = false;
+                Thread thread = new Thread(() => loadToPlc(recipe));
+                thread.IsBackground = true;
+                thread.Start();
+            }
+            catch (Exception e)
+            {
+                Notify?.Invoke(e.Message);
+            }      
         }
 
 
@@ -76,20 +80,23 @@ namespace RecipeLoader
         {
             try
             {
-                PLCDataLoader plcLoader = new PLCDataLoader(settingsLoader.Settings.ArrayDim1, settingsLoader.Settings.ArrayDim2);
-                plcLoader.Notify += Notify;
-                plcLoader.LoadRecipe(recipe);
+                PLCDataLoader recipeLoader = new PLCDataLoader(settingsLoader.Settings.Plc);
+                recipeLoader.Notify += Notify;
+                recipeLoader.LoadRecipe(recipe);
             }
             catch (Exception e)
             {
                 Notify?.Invoke(e.Message);
             }
-            Invoke(new Action(() =>
-                {
-                    BtnOpenRecipe.Enabled = true;
-                }));
+            finally
+            {
+                Invoke(new Action(() =>
+                    {
+                        BtnOpenRecipe.Enabled = true;
+                        Notify?.Invoke("***********************************************************");
+                    }));
+            }
         }          
-
         public Action<string> Notify { get; set; }
         void loadSettings()
         {
@@ -112,18 +119,11 @@ namespace RecipeLoader
                 Notify?.Invoke(e.Message);                
             }
         }
-        void loadTools()
-        {
-            toolLoader = new ToolDictionaryLoader();
-            toolLoader.Notify += Notify;
-            try
-            {
-                toolLoader.Load();
-            }
-            catch (Exception e)
-            {
-                Notify?.Invoke(e.Message);
-            }
+        ToolDictionary loadTools()
+        {            
+            ToolDictionaryLoader loader = new ToolDictionaryLoader();
+            loader.Notify += Notify;
+            return loader.Load();                
         }
         private void DeclineChanges(object sender, EventArgs e)
         {

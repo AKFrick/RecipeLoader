@@ -10,9 +10,7 @@ namespace RecipeLoader
     public class PLCDataLoader : INotifiable
     {
         public Action<string> Notify { get; set; }
-        public int ArrayDim1 { get; private set; }
-        public int ArrayDim2 { get; private set; }
-
+        PlcSettings settings;
 
         CpuType MyCpuType = S7.Net.CpuType.S71500;
         String MyCpuIp = "10.10.11.98";
@@ -21,18 +19,17 @@ namespace RecipeLoader
         Plc plc;
         ErrorCode connectionResult;
 
-        public PLCDataLoader(int arrayDim1, int arrayDim2)
+        public PLCDataLoader(PlcSettings settings)
         {
-            ArrayDim1 = arrayDim1;
-            ArrayDim2 = arrayDim2;
+            this.settings = settings;
         }
 
         public void LoadRecipe(RecipeData recipe)
         {
             Notify?.Invoke("Загрузка рецепта в ПЛК...");
             int i = 0;
-            if (recipe.Lines.Count > ArrayDim1) throw new Exception($"Количество строк в рецепте - {recipe.Lines.Count} больше, чем количество строк в массиве ПЛК - {ArrayDim1}");
-
+            if (recipe.Components.Count > settings.MaxNumberOfComponents) throw new Exception($"Количество строк в рецепте - {recipe.Components.Count} больше, " +
+                                                                                $"чем количество строк в массиве ПЛК - {settings.MaxNumberOfComponents}");
             using (plc = new Plc(MyCpuType, MyCpuIp, MyCpuRack, MyCpuSlot))
             {
                 connectionResult = plc.Open();
@@ -43,14 +40,15 @@ namespace RecipeLoader
                 }
                 else
                 {
-                    foreach (var line in recipe.Lines)
+                    foreach (var line in recipe.Components)
                     {
                         int j = 0;
-                        foreach (var item in line.Items)
+                        foreach (var item in line.Tools)
                         {
                             //Notify?.Invoke($"Загружаем инструмент {recipe.Lines[i].Items[j].Tool} : {recipe.Lines[i].Items[j].Value}");
                             j++;
-                            if (j > ArrayDim2) throw new Exception($"Количество инструментов в строке № {i + 1} - {j} больше, чем количество элементов в массиве ПЛК - {ArrayDim2}");
+                            if (j > settings.MaxToolsInComponent) throw new Exception($"Количество инструментов в строке № {i + 1} - {j} больше, " +
+                                                                            $"чем количество элементов в массиве ПЛК - {settings.MaxToolsInComponent}");
                         }
                         Notify($"Загружаем строку {i + 1}. Загружено инструментов: {j}");
                         i++;

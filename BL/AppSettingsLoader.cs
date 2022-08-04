@@ -10,18 +10,34 @@ namespace RecipeLoader
 {
     public class AppSettings : ICloneable
     {
+        public PlcSettings Plc = new PlcSettings();
+
+        public int FormHeight = 400;
+        public int FormWidth = 400; 
+        public System.Drawing.Point FormLocation = new System.Drawing.Point(0,0);
+        public string AppDirectory;
+
+        public string RecipeSearchFilter = "xls files (*.xls)|*.xls|csv files (*.csv)|*.csv";
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
+    }
+
+    public class PlcSettings 
+    {
         Regex repIP = new Regex(@"(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)");
-        string _plcIP = "192.168.0.2";
-        public string PLCIp 
-        { 
-            get { return _plcIP; } 
-            set 
+        string _ip = "192.168.0.2";
+        public string Ip
+        {
+            get { return _ip; }
+            set
             {
                 if (repIP.IsMatch(value))
-                    _plcIP = value;
+                    _ip = value;
                 else
                     throw new Exception("Неверный формат IP!");
-            } 
+            }
         }
         string _dbNum = "1";
         public string DBNum
@@ -41,45 +57,39 @@ namespace RecipeLoader
                 catch
                 {
                     throw new Exception("Неверный формат блока данных! Введите число от 1 до 99999");
-                }                
+                }
             }
-        }            
+        }
         public string ArrayOffset = "0";
-        int _arrayDim1 = 10;
-        public int ArrayDim1
+        int _maxNumberOfComponents = 10;
+        public int MaxNumberOfComponents
         {
-            get { return _arrayDim1; }
+            get { return _maxNumberOfComponents; }
             set
             {
                 if (value < 1 || value > 1000)
                     throw new Exception("Неверный формат размера массива! Введите число от 1 до 1000");
                 else
-                    _arrayDim1 = value;
+                    _maxNumberOfComponents = value;
             }
         }
-        int _arrayDim2 = 10;
-        public int ArrayDim2
+        int _maxToolsInComponent = 10;
+        public int MaxToolsInComponent
         {
-            get { return _arrayDim2; }
+            get { return _maxToolsInComponent; }
             set
             {
                 if (value < 1 || value > 1000)
                     throw new Exception("Неверный формат размера массива! Введите число от 1 до 1000");
                 else
-                    _arrayDim2 = value;
+                    _maxToolsInComponent = value;
             }
         }
+        public int ComponentsArrayOffset { get; set; }
+        public int ToolsOffset { get; set; }
+        public int ComponentSize { get; set; }
+        public int ComponentLenOffsiet { get; set; }
 
-        public int FormHeight = 400;
-        public int FormWidth = 400; 
-        public System.Drawing.Point FormLocation = new System.Drawing.Point(0,0);
-        public string AppDirectory;
-
-        public string RecipeSearchFilter = "xls files (*.xls)|*.xls|csv files (*.csv)|*.csv";
-        public object Clone()
-        {
-            return MemberwiseClone();
-        }
     }
 
     public class AppSettingsLoader : INotifiable

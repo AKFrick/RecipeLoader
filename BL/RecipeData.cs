@@ -5,31 +5,32 @@ using System.Text;
 
 namespace RecipeLoader
 {
-    public class RecipeItem
+    public class ToolPosn
     {
         public int Tool { get; private set; }
         public double Value { get; private set; }
 
-        public RecipeItem(int tool, double value)
+        public ToolPosn(int tool, double value)
         {
             Tool = tool;
             Value = value;
         }
     }
-    public class RecipeLine
+    public class Component
     {
-        public List<RecipeItem> Items;
-        public RecipeLine()
+        public List<ToolPosn> Tools;
+        public double Len;
+        public Component()
         {
-            Items = new List<RecipeItem>();
+            Tools = new List<ToolPosn>();
         }
     }
     public class RecipeData
     {
-        public List<RecipeLine> Lines { get; private set; }
+        public List<Component> Components { get; private set; }
         public RecipeData()
         {
-            Lines = new List<RecipeLine>();
+            Components = new List<Component>();
         }
 
     }

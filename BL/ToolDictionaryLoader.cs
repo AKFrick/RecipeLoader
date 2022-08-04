@@ -9,18 +9,17 @@ namespace RecipeLoader
     public class ToolDictionary : Dictionary<string, int> { }
     public class ToolDictionaryLoader : INotifiable
     {
-        string filename = "Res/ToolDictionary.csv";
-        public ToolDictionary Tools { get; private set; }
+        string filename = "Res/ToolDictionary.csv";        
         public Action<string> Notify { get; set; }
 
-        public void Load()
+        public ToolDictionary Load()
         {
             if (!File.Exists(filename))
                 throw new Exception($"Файл инструментов '{filename}' не найден!");
             else
             {
                 Notify?.Invoke("Загрузка списка инструментов...");
-                Tools = new ToolDictionary();
+                ToolDictionary tools = new ToolDictionary();
                 string[] lines = File.ReadAllLines(filename);
  
                 foreach (string line in lines)
@@ -28,7 +27,7 @@ namespace RecipeLoader
                     try
                     {
                         string[] substr = line.Split(',');
-                        Tools.Add(substr[0], short.Parse(substr[1]));                     
+                        tools.Add(substr[0], short.Parse(substr[1]));                     
                     }
                     catch (Exception ex)
                     {
@@ -37,7 +36,8 @@ namespace RecipeLoader
                     }
                 }
                 Notify?.Invoke("Список инструментов загружен");
-            }
+                return tools;
+            }            
                 
         }
     }

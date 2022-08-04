@@ -35,7 +35,7 @@ namespace RecipeLoader
                 {
                     try
                     {
-                        data.Lines.Add(parseLine(lines[i]));                       
+                        data.Components.Add(parseLine(lines[i]));                       
                     }
                     catch (Exception e)
                     {
@@ -47,14 +47,14 @@ namespace RecipeLoader
             Notify?.Invoke("Рецепт распознан");
             return data;
         }
-        RecipeLine parseLine(string rawLine)
+        Component parseLine(string rawLine)
         {
             //Notify($"Распознаем строку {rawLine}");
             string[] substr = rawLine.Split(',');
             //Notify($"Длина строки {substr.Length}");
             if (substr.Length % 2 != 1)
                 throw new Exception("Некорректная длина строки");
-            RecipeLine resultLine = new RecipeLine();    
+            Component resultLine = new Component();    
                 
             int tool;
             double value;
@@ -69,7 +69,7 @@ namespace RecipeLoader
                 try { value = double.Parse(substr[i + 1], CultureInfo.InvariantCulture); }
                 catch { throw new Exception($"Инструмент: '{substr[i]}' Неверный формат значения"); }
 
-                resultLine.Items.Add(new RecipeItem(tool, value));
+                resultLine.Tools.Add(new ToolPosn(tool, value));
             }
             return resultLine;
         }
