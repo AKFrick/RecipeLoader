@@ -61,12 +61,52 @@ namespace RecipeLoader.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DeclinePi {
+            get {
+                object obj = ResourceManager.GetObject("DeclinePi", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap OpenFilePic {
+            get {
+                object obj = ResourceManager.GetObject("OpenFilePic", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon recipeloadericon {
             get {
                 object obj = ResourceManager.GetObject("recipeloadericon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SavePic {
+            get {
+                object obj = ResourceManager.GetObject("SavePic", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SettingsPic {
+            get {
+                object obj = ResourceManager.GetObject("SettingsPic", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

@@ -114,6 +114,10 @@
     <None Include="recipeloadericon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\OpenFilePic.png" />
+    <None Include="Resources\SettingsPic.png" />
+    <None Include="Resources\SavePic.png" />
+    <None Include="Resources\DeclinePi.png" />
     <Content Include="иконка64х64.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

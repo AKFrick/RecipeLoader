@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.MainLayout = new System.Windows.Forms.TableLayoutPanel();
             this.LeftBar = new System.Windows.Forms.Panel();
             this.BtnSaveSettings = new System.Windows.Forms.Button();
@@ -79,12 +80,16 @@
             // 
             this.BtnSaveSettings.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.BtnSaveSettings.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BtnSaveSettings.Image = global::RecipeLoader.Properties.Resources.SavePic;
+            this.BtnSaveSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnSaveSettings.Location = new System.Drawing.Point(0, 408);
             this.BtnSaveSettings.Margin = new System.Windows.Forms.Padding(0);
             this.BtnSaveSettings.Name = "BtnSaveSettings";
+            this.BtnSaveSettings.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.BtnSaveSettings.Size = new System.Drawing.Size(242, 81);
             this.BtnSaveSettings.TabIndex = 2;
             this.BtnSaveSettings.Text = "Сохранить";
+            this.BtnSaveSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BtnSaveSettings.UseVisualStyleBackColor = true;
             this.BtnSaveSettings.Visible = false;
             // 
@@ -92,24 +97,34 @@
             // 
             this.BtnOpenRecipe.Dock = System.Windows.Forms.DockStyle.Top;
             this.BtnOpenRecipe.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BtnOpenRecipe.Image = ((System.Drawing.Image)(resources.GetObject("BtnOpenRecipe.Image")));
+            this.BtnOpenRecipe.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnOpenRecipe.Location = new System.Drawing.Point(0, 0);
             this.BtnOpenRecipe.Margin = new System.Windows.Forms.Padding(4);
             this.BtnOpenRecipe.Name = "BtnOpenRecipe";
+            this.BtnOpenRecipe.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.BtnOpenRecipe.Size = new System.Drawing.Size(242, 81);
             this.BtnOpenRecipe.TabIndex = 1;
-            this.BtnOpenRecipe.Text = "Загрузить рецепт";
+            this.BtnOpenRecipe.Text = "Загрузить\r\nрецепт";
+            this.BtnOpenRecipe.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnOpenRecipe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BtnOpenRecipe.UseVisualStyleBackColor = true;
             // 
             // BtnDeclineChanges
             // 
             this.BtnDeclineChanges.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.BtnDeclineChanges.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BtnDeclineChanges.Image = global::RecipeLoader.Properties.Resources.DeclinePi;
+            this.BtnDeclineChanges.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnDeclineChanges.Location = new System.Drawing.Point(0, 489);
             this.BtnDeclineChanges.Margin = new System.Windows.Forms.Padding(0);
             this.BtnDeclineChanges.Name = "BtnDeclineChanges";
+            this.BtnDeclineChanges.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.BtnDeclineChanges.Size = new System.Drawing.Size(242, 81);
             this.BtnDeclineChanges.TabIndex = 0;
-            this.BtnDeclineChanges.Text = "Не сохранять";
+            this.BtnDeclineChanges.Text = "Отменить";
+            this.BtnDeclineChanges.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnDeclineChanges.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BtnDeclineChanges.UseVisualStyleBackColor = true;
             this.BtnDeclineChanges.Visible = false;
             // 
@@ -117,12 +132,17 @@
             // 
             this.BtnSettings.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.BtnSettings.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BtnSettings.Image = global::RecipeLoader.Properties.Resources.SettingsPic;
+            this.BtnSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnSettings.Location = new System.Drawing.Point(0, 570);
             this.BtnSettings.Margin = new System.Windows.Forms.Padding(0);
             this.BtnSettings.Name = "BtnSettings";
+            this.BtnSettings.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.BtnSettings.Size = new System.Drawing.Size(242, 81);
             this.BtnSettings.TabIndex = 0;
             this.BtnSettings.Text = "Настройки";
+            this.BtnSettings.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BtnSettings.UseVisualStyleBackColor = true;
             // 
             // Content
