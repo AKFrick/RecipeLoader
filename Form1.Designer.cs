@@ -49,7 +49,7 @@
             // 
             this.MainLayout.ColumnCount = 2;
             this.MainLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.MainLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
+            this.MainLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 220F));
             this.MainLayout.Controls.Add(this.LeftBar, 1, 0);
             this.MainLayout.Controls.Add(this.Content, 0, 0);
             this.MainLayout.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -58,7 +58,6 @@
             this.MainLayout.Name = "MainLayout";
             this.MainLayout.RowCount = 1;
             this.MainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.MainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 569F));
             this.MainLayout.Size = new System.Drawing.Size(1023, 659);
             this.MainLayout.TabIndex = 0;
             // 
@@ -70,10 +69,10 @@
             this.LeftBar.Controls.Add(this.BtnDeclineChanges);
             this.LeftBar.Controls.Add(this.BtnSettings);
             this.LeftBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LeftBar.Location = new System.Drawing.Point(777, 4);
+            this.LeftBar.Location = new System.Drawing.Point(807, 4);
             this.LeftBar.Margin = new System.Windows.Forms.Padding(4);
             this.LeftBar.Name = "LeftBar";
-            this.LeftBar.Size = new System.Drawing.Size(242, 651);
+            this.LeftBar.Size = new System.Drawing.Size(212, 651);
             this.LeftBar.TabIndex = 0;
             // 
             // BtnSaveSettings
@@ -86,7 +85,7 @@
             this.BtnSaveSettings.Margin = new System.Windows.Forms.Padding(0);
             this.BtnSaveSettings.Name = "BtnSaveSettings";
             this.BtnSaveSettings.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.BtnSaveSettings.Size = new System.Drawing.Size(242, 81);
+            this.BtnSaveSettings.Size = new System.Drawing.Size(212, 81);
             this.BtnSaveSettings.TabIndex = 2;
             this.BtnSaveSettings.Text = "Сохранить";
             this.BtnSaveSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -103,7 +102,7 @@
             this.BtnOpenRecipe.Margin = new System.Windows.Forms.Padding(4);
             this.BtnOpenRecipe.Name = "BtnOpenRecipe";
             this.BtnOpenRecipe.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.BtnOpenRecipe.Size = new System.Drawing.Size(242, 81);
+            this.BtnOpenRecipe.Size = new System.Drawing.Size(212, 81);
             this.BtnOpenRecipe.TabIndex = 1;
             this.BtnOpenRecipe.Text = "Загрузить\r\nрецепт";
             this.BtnOpenRecipe.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -120,7 +119,7 @@
             this.BtnDeclineChanges.Margin = new System.Windows.Forms.Padding(0);
             this.BtnDeclineChanges.Name = "BtnDeclineChanges";
             this.BtnDeclineChanges.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.BtnDeclineChanges.Size = new System.Drawing.Size(242, 81);
+            this.BtnDeclineChanges.Size = new System.Drawing.Size(212, 81);
             this.BtnDeclineChanges.TabIndex = 0;
             this.BtnDeclineChanges.Text = "Отменить";
             this.BtnDeclineChanges.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -138,7 +137,7 @@
             this.BtnSettings.Margin = new System.Windows.Forms.Padding(0);
             this.BtnSettings.Name = "BtnSettings";
             this.BtnSettings.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.BtnSettings.Size = new System.Drawing.Size(242, 81);
+            this.BtnSettings.Size = new System.Drawing.Size(212, 81);
             this.BtnSettings.TabIndex = 0;
             this.BtnSettings.Text = "Настройки";
             this.BtnSettings.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -153,7 +152,7 @@
             this.Content.Location = new System.Drawing.Point(4, 4);
             this.Content.Margin = new System.Windows.Forms.Padding(4);
             this.Content.Name = "Content";
-            this.Content.Size = new System.Drawing.Size(765, 651);
+            this.Content.Size = new System.Drawing.Size(795, 651);
             this.Content.TabIndex = 1;
             // 
             // tableLayoutPanel1
@@ -168,7 +167,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(763, 649);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(793, 649);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // processControl1
@@ -177,7 +176,7 @@
             this.processControl1.Location = new System.Drawing.Point(4, 527);
             this.processControl1.Margin = new System.Windows.Forms.Padding(4);
             this.processControl1.Name = "processControl1";
-            this.processControl1.Size = new System.Drawing.Size(755, 118);
+            this.processControl1.Size = new System.Drawing.Size(785, 118);
             this.processControl1.TabIndex = 1;
             // 
             // settingsControl1
@@ -189,7 +188,7 @@
             this.settingsControl1.Name = "settingsControl1";
             this.settingsControl1.Notify = null;
             this.settingsControl1.Settings = null;
-            this.settingsControl1.Size = new System.Drawing.Size(755, 515);
+            this.settingsControl1.Size = new System.Drawing.Size(785, 515);
             this.settingsControl1.TabIndex = 0;
             this.settingsControl1.Visible = false;
             // 
