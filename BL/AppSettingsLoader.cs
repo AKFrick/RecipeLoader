@@ -73,13 +73,13 @@ namespace RecipeLoader
         public int FormHeight = 400;
         public int FormWidth = 400; 
         public System.Drawing.Point FormLocation = new System.Drawing.Point(0,0);
+        public string AppDirectory;
 
         public string RecipeSearchFilter = "xls files (*.xls)|*.xls|csv files (*.csv)|*.csv";
         public object Clone()
         {
             return MemberwiseClone();
         }
-
     }
 
     public class AppSettingsLoader : INotifiable
@@ -121,11 +121,12 @@ namespace RecipeLoader
         public Action<string> Notify { get; set; }
         public Action<AppSettings> SettingsChanged { get; set; }
 
-        public void SaveFormDim(int Height, int Width, System.Drawing.Point Location)
+        public void SaveFormDim(int Height, int Width, System.Drawing.Point Location, string CurrentDirectory)
         {
             settings.FormHeight = Height;
             settings.FormWidth = Width;
             settings.FormLocation = Location;
+            settings.AppDirectory = CurrentDirectory; 
             writeXML(settings);
             SettingsChanged?.Invoke(Settings);
         }

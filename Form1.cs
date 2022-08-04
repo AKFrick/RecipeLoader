@@ -19,8 +19,6 @@ namespace RecipeLoader
         {            
             InitializeComponent();
 
-            StartPosition = FormStartPosition.Manual;
-
             BtnSettings.Click += ShowSettings;
             BtnSaveSettings.Click += SaveSettings;
             BtnDeclineChanges.Click += DeclineChanges;
@@ -86,9 +84,13 @@ namespace RecipeLoader
             try
             {
                 settingsLoader.Load();
-                Height = settingsLoader.Settings.FormHeight;
-                Width = settingsLoader.Settings.FormWidth;
-                Location = settingsLoader.Settings.FormLocation;
+                if (settingsLoader.Settings.AppDirectory == Environment.CurrentDirectory)
+                {
+                    StartPosition = FormStartPosition.Manual;
+                    Height = settingsLoader.Settings.FormHeight;
+                    Width = settingsLoader.Settings.FormWidth;
+                    Location = settingsLoader.Settings.FormLocation;
+                }
             }
             catch (Exception e)
             {
@@ -143,7 +145,7 @@ namespace RecipeLoader
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            settingsLoader.SaveFormDim(Height, Width, Location);
+            settingsLoader.SaveFormDim(Height, Width, Location, Environment.CurrentDirectory);
         }
     }
 }
