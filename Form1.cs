@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+using S7.Net;
 
 namespace RecipeLoader
 {
@@ -143,7 +144,7 @@ namespace RecipeLoader
             }
         }
         private void ShowSettings(object sender, EventArgs e)
-        {
+        {           
             settingsControl1.Visible = true;
             BtnSettings.Visible = false;
             BtnSaveSettings.Visible = true;
