@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using System.Text.RegularExpressions;
+using S7.Net;
 
 namespace RecipeLoader
 {
@@ -39,7 +40,7 @@ namespace RecipeLoader
                     throw new Exception("Неверный формат IP!");
             }
         }
-        string _dbNum = "1";
+        string _dbNum = "1000";
         public string DBNum
         {
             get { return _dbNum; }
@@ -85,11 +86,11 @@ namespace RecipeLoader
                     _maxToolsInComponent = value;
             }
         }
-        public int ComponentsArrayOffset { get; set; }
-        public int ToolsOffset { get; set; }
-        public int ComponentSize { get; set; }
-        public int ComponentLenOffsiet { get; set; }
 
+        public CpuType CpuType { get; set; } = S7.Net.CpuType.S71500;        
+        public short CpuRack { get; set; }  = 0;
+        public short CpuSlot { get; set; } = 1;
+        public bool EnableLogSystemMsg = false;
     }
 
     public class AppSettingsLoader : INotifiable

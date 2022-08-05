@@ -60,6 +60,9 @@ namespace RecipeLoader
             double value;
 
             int j = 0;
+            try { resultLine.Len = double.Parse(substr[4], CultureInfo.InvariantCulture); }
+            catch { throw new Exception($"Ошибка в длине детали"); }
+
             for (int i = 5; i < substr.Length; i+=2)
             {                
                 //Notify($"Распознаем инструмент {substr[i]}");

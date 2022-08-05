@@ -29,6 +29,8 @@ namespace RecipeLoader
                     tbIP.Text = settings.Plc.Ip;
                     tbArrayDim1.Text = settings.Plc.MaxNumberOfComponents.ToString();
                     tbArrayDim2.Text = settings.Plc.MaxToolsInComponent.ToString();
+
+                    cbEnableSystemMsg.Checked = settings.Plc.EnableLogSystemMsg;
                 }
             }
         }
@@ -44,6 +46,8 @@ namespace RecipeLoader
                 settings.Plc.Ip = tbIP.Text;
                 settings.Plc.MaxNumberOfComponents = short.Parse(tbArrayDim1.Text);
                 settings.Plc.MaxToolsInComponent = short.Parse(tbArrayDim2.Text);
+
+                settings.Plc.EnableLogSystemMsg = cbEnableSystemMsg.Checked;
             }
             catch (Exception ex)
             {
