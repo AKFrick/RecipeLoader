@@ -38,7 +38,7 @@ namespace RecipeLoader
         {
             InitializeComponent();
         }
-        public Action<string> Notify { get; set; }
+        public event Action<string> Notify;
         public void Save()
         {
             try

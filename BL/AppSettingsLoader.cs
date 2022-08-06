@@ -129,7 +129,7 @@ namespace RecipeLoader
             SettingsChanged?.Invoke(Settings);
         }
 
-        public Action<string> Notify { get; set; }
+        public event Action<string> Notify;
         public Action<AppSettings> SettingsChanged { get; set; }
 
         public void SaveFormDim(int Height, int Width, System.Drawing.Point Location, string CurrentDirectory)

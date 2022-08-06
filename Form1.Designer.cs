@@ -186,7 +186,6 @@
             this.settingsControl1.Location = new System.Drawing.Point(4, 4);
             this.settingsControl1.Margin = new System.Windows.Forms.Padding(4);
             this.settingsControl1.Name = "settingsControl1";
-            this.settingsControl1.Notify = null;
             this.settingsControl1.Settings = null;
             this.settingsControl1.Size = new System.Drawing.Size(785, 515);
             this.settingsControl1.TabIndex = 0;

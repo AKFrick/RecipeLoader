@@ -9,7 +9,7 @@ namespace RecipeLoader
 {
     public class RecipeParser : INotifiable
     {
-        public Action<string> Notify { get; set; }
+        public event Action<string> Notify;
         RecipeData data;
         ToolDictionary tools;
         public int HeaderLines { get; set; } = 3;

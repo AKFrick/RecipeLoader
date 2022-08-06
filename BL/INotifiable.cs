@@ -7,6 +7,6 @@ namespace RecipeLoader
 {
     public interface INotifiable
     {
-        Action<String> Notify { get; set; }
+        event Action<String> Notify;
     }
 }

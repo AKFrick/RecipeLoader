@@ -9,8 +9,8 @@ namespace RecipeLoader
     public class ToolDictionary : Dictionary<string, int> { }
     public class ToolDictionaryLoader : INotifiable
     {
-        string filename = "Res/ToolDictionary.csv";        
-        public Action<string> Notify { get; set; }
+        string filename = "Res/ToolDictionary.csv";
+        public event Action<string> Notify;
 
         public ToolDictionary Load()
         {

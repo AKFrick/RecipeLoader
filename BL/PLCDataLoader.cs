@@ -9,7 +9,7 @@ namespace RecipeLoader
 {
     public class PLCDataLoader : INotifiable
     {
-        public Action<string> Notify { get; set; }
+        public event Action<string> Notify;
         PlcSettings settings;
         Plc plc;
         ErrorCode connectionResult;
@@ -38,6 +38,10 @@ namespace RecipeLoader
             this.settings = settings;
             component_Size = componentLen_Size + toolsTotal_Size + tool_Size * (settings.MaxToolsInComponent);
         }
+        public void LoadAsStruct(RecipeData recipe)
+        {            
+        }
+
         public void LoadRecipe(RecipeData recipe)
         {
             Notify?.Invoke("Загрузка рецепта в ПЛК...");

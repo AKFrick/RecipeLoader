@@ -97,8 +97,8 @@ namespace RecipeLoader
                         Notify?.Invoke("***********************************************************");
                     }));
             }
-        }          
-        public Action<string> Notify { get; set; }
+        }
+        public event Action<string> Notify;
         void loadSettings()
         {
             settingsLoader = new AppSettingsLoader();
