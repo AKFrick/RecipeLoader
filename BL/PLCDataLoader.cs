@@ -104,7 +104,7 @@ namespace RecipeLoader
                     plc.Write(getComponentsTotalAddress(), i);
 
                     Notify?.Invoke($"Загружено строк: {i}");
-                    if (settings.EnableLogSystemMsg) Notify?.Invoke($"Обнуляем оставшиеся строки...:");
+                    Notify?.Invoke($"Обнуляем неиспользуемые строки...:");
 
                     //Обнуляем незаполненные строки
                     for (; i < settings.MaxNumberOfComponents; i++)

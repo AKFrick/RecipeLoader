@@ -1,0 +1,39 @@
+﻿TYPE "ToolPosn"
+TITLE = инструмент
+VERSION : 0.1
+   STRUCT
+      Tool : Int;   // номер инструмента
+      Posn : Real;   // позиция инструмента
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "Component"
+VERSION : 0.1
+   STRUCT
+      ComponentLen : Real;   // длина детали
+      ToolsTotal : Int;   // количество используемых инструментов в записи
+      Tools { S7_SetPoint := 'False'} : Array[1..50] of "ToolPosn";   // инструменты
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "RecipeData"
+VERSION : 0.1
+   STRUCT
+      ComponentsTotal : Int;   // количество деталей
+      Components { S7_SetPoint := 'False'} : Array[1..50] of "Component";   // детали
+   END_STRUCT;
+
+END_TYPE
+
+DATA_BLOCK "Recipe"
+{ S7_Optimized_Access := 'FALSE' }
+VERSION : 0.1
+NON_RETAIN
+"RecipeData"
+
+BEGIN
+
+END_DATA_BLOCK
+
