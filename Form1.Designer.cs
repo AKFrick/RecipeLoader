@@ -165,18 +165,18 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(793, 649);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // processControl1
             // 
             this.processControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.processControl1.Location = new System.Drawing.Point(4, 527);
+            this.processControl1.Location = new System.Drawing.Point(4, 453);
             this.processControl1.Margin = new System.Windows.Forms.Padding(4);
             this.processControl1.Name = "processControl1";
-            this.processControl1.Size = new System.Drawing.Size(785, 118);
+            this.processControl1.Size = new System.Drawing.Size(785, 192);
             this.processControl1.TabIndex = 1;
             // 
             // settingsControl1
@@ -187,13 +187,13 @@
             this.settingsControl1.Margin = new System.Windows.Forms.Padding(4);
             this.settingsControl1.Name = "settingsControl1";
             this.settingsControl1.Settings = null;
-            this.settingsControl1.Size = new System.Drawing.Size(785, 515);
+            this.settingsControl1.Size = new System.Drawing.Size(785, 441);
             this.settingsControl1.TabIndex = 0;
             this.settingsControl1.Visible = false;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1023, 659);
             this.Controls.Add(this.MainLayout);
