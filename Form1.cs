@@ -146,6 +146,7 @@ namespace RecipeLoader
         private void ShowSettings(object sender, EventArgs e)
         {           
             settingsControl1.Visible = true;
+            componentGrid1.Visible = false;
             BtnSettings.Visible = false;
             BtnSaveSettings.Visible = true;
             BtnDeclineChanges.Visible = true;
@@ -155,6 +156,7 @@ namespace RecipeLoader
         private void HideSettings()
         {
             settingsControl1.Visible = false;
+            componentGrid1.Visible = true;
             BtnSettings.Visible = true;
             BtnSaveSettings.Visible = false;
             BtnDeclineChanges.Visible = false;

@@ -38,11 +38,14 @@
             this.Content = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.processControl1 = new RecipeLoader.ProcessControl();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.settingsControl1 = new RecipeLoader.SettingsControl();
+            this.componentGrid1 = new RecipeLoader.View.ComponentGrid();
             this.MainLayout.SuspendLayout();
             this.LeftBar.SuspendLayout();
             this.Content.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainLayout
@@ -160,7 +163,7 @@
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.processControl1, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.settingsControl1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -179,17 +182,35 @@
             this.processControl1.Size = new System.Drawing.Size(785, 192);
             this.processControl1.TabIndex = 1;
             // 
+            // panel1
+            // 
+            this.panel1.AutoSize = true;
+            this.panel1.Controls.Add(this.componentGrid1);
+            this.panel1.Controls.Add(this.settingsControl1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(787, 443);
+            this.panel1.TabIndex = 2;
+            // 
             // settingsControl1
             // 
             this.settingsControl1.AutoSize = true;
             this.settingsControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.settingsControl1.Location = new System.Drawing.Point(4, 4);
-            this.settingsControl1.Margin = new System.Windows.Forms.Padding(4);
+            this.settingsControl1.Location = new System.Drawing.Point(0, 0);
             this.settingsControl1.Name = "settingsControl1";
             this.settingsControl1.Settings = null;
-            this.settingsControl1.Size = new System.Drawing.Size(785, 441);
+            this.settingsControl1.Size = new System.Drawing.Size(787, 443);
             this.settingsControl1.TabIndex = 0;
-            this.settingsControl1.Visible = false;
+            // 
+            // componentGrid1
+            // 
+            this.componentGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.componentGrid1.Location = new System.Drawing.Point(0, 0);
+            this.componentGrid1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.componentGrid1.Name = "componentGrid1";
+            this.componentGrid1.Size = new System.Drawing.Size(787, 443);
+            this.componentGrid1.TabIndex = 1;
             // 
             // Form1
             // 
@@ -207,6 +228,8 @@
             this.Content.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -218,11 +241,13 @@
         private System.Windows.Forms.Button BtnSettings;
         private System.Windows.Forms.Panel Content;
         private System.Windows.Forms.Button BtnOpenRecipe;
-        private SettingsControl settingsControl1;
         private System.Windows.Forms.Button BtnSaveSettings;
         private System.Windows.Forms.Button BtnDeclineChanges;
         private ProcessControl processControl1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Panel panel1;
+        private View.ComponentGrid componentGrid1;
+        private SettingsControl settingsControl1;
     }
 }
 
