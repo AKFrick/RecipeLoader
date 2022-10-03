@@ -30,6 +30,9 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.IsOnLoadQueue = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Len = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -46,11 +49,34 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IsOnLoadQueue,
+            this.FileName,
+            this.Len});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(673, 526);
             this.dataGridView1.TabIndex = 0;
+            // 
+            // IsOnLoadQueue
+            // 
+            this.IsOnLoadQueue.HeaderText = "В очереди на загрузку";
+            this.IsOnLoadQueue.Name = "IsOnLoadQueue";
+            this.IsOnLoadQueue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.IsOnLoadQueue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // FileName
+            // 
+            this.FileName.HeaderText = "Файл";
+            this.FileName.Name = "FileName";
+            // 
+            // Len
+            // 
+            this.Len.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Len.HeaderText = "Длина";
+            this.Len.Name = "Len";
+            this.Len.Width = 70;
             // 
             // ComponentGrid
             // 
@@ -69,5 +95,8 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn IsOnLoadQueue;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Len;
     }
 }

@@ -18,8 +18,10 @@ namespace RecipeLoader
     }
     public class Component
     {
+
+
         public List<ToolPosn> Tools;
-        public double Len;
+        public double Len { get; set; }
         public Component()
         {
             Tools = new List<ToolPosn>();

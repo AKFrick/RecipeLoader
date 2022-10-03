@@ -33,7 +33,8 @@ namespace RecipeLoader
             loadSettings();
         }
         private void OpenFileDialog(object sender, EventArgs e)
-        {
+        {             
+            return;
             OpenFileDialog openFileDialog1 = new OpenFileDialog
             {
                 Title = "Выберите файл рецепта",
