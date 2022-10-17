@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.MainLayout = new System.Windows.Forms.TableLayoutPanel();
             this.LeftBar = new System.Windows.Forms.Panel();
+            this.BtnClearGrid = new System.Windows.Forms.Button();
             this.BtnSaveSettings = new System.Windows.Forms.Button();
             this.BtnOpenRecipe = new System.Windows.Forms.Button();
             this.BtnDeclineChanges = new System.Windows.Forms.Button();
@@ -39,8 +40,8 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.processControl1 = new RecipeLoader.ProcessControl();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.settingsControl1 = new RecipeLoader.SettingsControl();
             this.componentGrid1 = new RecipeLoader.View.ComponentGrid();
+            this.settingsControl1 = new RecipeLoader.SettingsControl();
             this.MainLayout.SuspendLayout();
             this.LeftBar.SuspendLayout();
             this.Content.SuspendLayout();
@@ -67,6 +68,7 @@
             // LeftBar
             // 
             this.LeftBar.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.LeftBar.Controls.Add(this.BtnClearGrid);
             this.LeftBar.Controls.Add(this.BtnSaveSettings);
             this.LeftBar.Controls.Add(this.BtnOpenRecipe);
             this.LeftBar.Controls.Add(this.BtnDeclineChanges);
@@ -77,6 +79,23 @@
             this.LeftBar.Name = "LeftBar";
             this.LeftBar.Size = new System.Drawing.Size(212, 651);
             this.LeftBar.TabIndex = 0;
+            // 
+            // BtnClearGrid
+            // 
+            this.BtnClearGrid.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnClearGrid.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BtnClearGrid.Image = global::RecipeLoader.Properties.Resources.ClearPic;
+            this.BtnClearGrid.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnClearGrid.Location = new System.Drawing.Point(0, 81);
+            this.BtnClearGrid.Margin = new System.Windows.Forms.Padding(4);
+            this.BtnClearGrid.Name = "BtnClearGrid";
+            this.BtnClearGrid.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.BtnClearGrid.Size = new System.Drawing.Size(212, 81);
+            this.BtnClearGrid.TabIndex = 3;
+            this.BtnClearGrid.Text = "Очистить таблицу";
+            this.BtnClearGrid.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnClearGrid.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BtnClearGrid.UseVisualStyleBackColor = true;
             // 
             // BtnSaveSettings
             // 
@@ -107,7 +126,7 @@
             this.BtnOpenRecipe.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.BtnOpenRecipe.Size = new System.Drawing.Size(212, 81);
             this.BtnOpenRecipe.TabIndex = 1;
-            this.BtnOpenRecipe.Text = "Загрузить\r\nрецепт";
+            this.BtnOpenRecipe.Text = "Добавить файл";
             this.BtnOpenRecipe.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnOpenRecipe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BtnOpenRecipe.UseVisualStyleBackColor = true;
@@ -193,6 +212,16 @@
             this.panel1.Size = new System.Drawing.Size(787, 443);
             this.panel1.TabIndex = 2;
             // 
+            // componentGrid1
+            // 
+            this.componentGrid1.Description = null;
+            this.componentGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.componentGrid1.Location = new System.Drawing.Point(0, 0);
+            this.componentGrid1.Margin = new System.Windows.Forms.Padding(4);
+            this.componentGrid1.Name = "componentGrid1";
+            this.componentGrid1.Size = new System.Drawing.Size(787, 443);
+            this.componentGrid1.TabIndex = 1;
+            // 
             // settingsControl1
             // 
             this.settingsControl1.AutoSize = true;
@@ -203,18 +232,9 @@
             this.settingsControl1.Size = new System.Drawing.Size(787, 443);
             this.settingsControl1.TabIndex = 0;
             // 
-            // componentGrid1
-            // 
-            this.componentGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.componentGrid1.Location = new System.Drawing.Point(0, 0);
-            this.componentGrid1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.componentGrid1.Name = "componentGrid1";
-            this.componentGrid1.Size = new System.Drawing.Size(787, 443);
-            this.componentGrid1.TabIndex = 1;
-            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1023, 659);
             this.Controls.Add(this.MainLayout);
@@ -248,6 +268,7 @@
         private System.Windows.Forms.Panel panel1;
         private View.ComponentGrid componentGrid1;
         private SettingsControl settingsControl1;
+        private System.Windows.Forms.Button BtnClearGrid;
     }
 }
 
