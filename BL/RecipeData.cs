@@ -19,7 +19,7 @@ namespace RecipeLoader
     public class Component
     {
 
-
+        public string File;
         public List<ToolPosn> Tools;
         public double Len { get; set; }
         public Component()

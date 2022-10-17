@@ -24,28 +24,24 @@ namespace RecipeLoader.View
             comp = new List<LoadQueueComponent>();                                  
             for (int i = 0; i < 100; i++)
             {
-                comp.Add(new LoadQueueComponent() { IsOnLoadQueue = true, Len = 55, LoadTime = DateTime.Now }) ;
+                comp.Add(new LoadQueueComponent() { IsOnLoadQueue = true, Len = 55, DownloadTime = DateTime.Now }) ;
             }
 
             dataGridView1.DataSource = comp;
             dataGridView1.Columns["IsOnLoadQueue"].DataPropertyName = nameof(LoadQueueComponent.IsOnLoadQueue);
             dataGridView1.Columns["Len"].DataPropertyName = nameof(Component.Len);
+            dataGridView1.Columns["DownloadTime"].DataPropertyName = nameof(LoadQueueComponent.DownloadTime);
+            dataGridView1.Columns["FileName"].DataPropertyName = nameof(LoadQueueComponent.File);
         }
         public bool getState()
         {
             return comp[0].IsOnLoadQueue;
         }
-
-        public class MyClass
-        {
-            public bool isHuman { get; set; } = false;
-            public string Name { get; set; }
-            public string Description { get; set; }
-        }
+        public string Description { get; set; }        
         public class LoadQueueComponent : Component
         {
             public bool IsOnLoadQueue { get; set; }
-            public DateTime LoadTime { get; set; }
+            public DateTime DownloadTime { get; set; }
         }
     }
 }
