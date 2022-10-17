@@ -32,6 +32,7 @@
             this.MainLayout = new System.Windows.Forms.TableLayoutPanel();
             this.LeftBar = new System.Windows.Forms.Panel();
             this.BtnClearGrid = new System.Windows.Forms.Button();
+            this.BtnRemoveRows = new System.Windows.Forms.Button();
             this.BtnSaveSettings = new System.Windows.Forms.Button();
             this.BtnOpenRecipe = new System.Windows.Forms.Button();
             this.BtnDeclineChanges = new System.Windows.Forms.Button();
@@ -62,22 +63,23 @@
             this.MainLayout.Name = "MainLayout";
             this.MainLayout.RowCount = 1;
             this.MainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.MainLayout.Size = new System.Drawing.Size(1023, 659);
+            this.MainLayout.Size = new System.Drawing.Size(818, 527);
             this.MainLayout.TabIndex = 0;
             // 
             // LeftBar
             // 
             this.LeftBar.BackColor = System.Drawing.SystemColors.MenuBar;
             this.LeftBar.Controls.Add(this.BtnClearGrid);
+            this.LeftBar.Controls.Add(this.BtnRemoveRows);
             this.LeftBar.Controls.Add(this.BtnSaveSettings);
             this.LeftBar.Controls.Add(this.BtnOpenRecipe);
             this.LeftBar.Controls.Add(this.BtnDeclineChanges);
             this.LeftBar.Controls.Add(this.BtnSettings);
             this.LeftBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LeftBar.Location = new System.Drawing.Point(807, 4);
+            this.LeftBar.Location = new System.Drawing.Point(602, 4);
             this.LeftBar.Margin = new System.Windows.Forms.Padding(4);
             this.LeftBar.Name = "LeftBar";
-            this.LeftBar.Size = new System.Drawing.Size(212, 651);
+            this.LeftBar.Size = new System.Drawing.Size(212, 519);
             this.LeftBar.TabIndex = 0;
             // 
             // BtnClearGrid
@@ -86,7 +88,7 @@
             this.BtnClearGrid.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BtnClearGrid.Image = global::RecipeLoader.Properties.Resources.ClearPic;
             this.BtnClearGrid.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnClearGrid.Location = new System.Drawing.Point(0, 81);
+            this.BtnClearGrid.Location = new System.Drawing.Point(0, 162);
             this.BtnClearGrid.Margin = new System.Windows.Forms.Padding(4);
             this.BtnClearGrid.Name = "BtnClearGrid";
             this.BtnClearGrid.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
@@ -97,13 +99,30 @@
             this.BtnClearGrid.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BtnClearGrid.UseVisualStyleBackColor = true;
             // 
+            // BtnRemoveRows
+            // 
+            this.BtnRemoveRows.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnRemoveRows.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BtnRemoveRows.Image = global::RecipeLoader.Properties.Resources.RemoveRowPic;
+            this.BtnRemoveRows.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnRemoveRows.Location = new System.Drawing.Point(0, 81);
+            this.BtnRemoveRows.Margin = new System.Windows.Forms.Padding(4);
+            this.BtnRemoveRows.Name = "BtnRemoveRows";
+            this.BtnRemoveRows.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.BtnRemoveRows.Size = new System.Drawing.Size(212, 81);
+            this.BtnRemoveRows.TabIndex = 4;
+            this.BtnRemoveRows.Text = "Удалить строки";
+            this.BtnRemoveRows.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnRemoveRows.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BtnRemoveRows.UseVisualStyleBackColor = true;
+            // 
             // BtnSaveSettings
             // 
             this.BtnSaveSettings.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.BtnSaveSettings.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BtnSaveSettings.Image = global::RecipeLoader.Properties.Resources.SavePic;
             this.BtnSaveSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSaveSettings.Location = new System.Drawing.Point(0, 408);
+            this.BtnSaveSettings.Location = new System.Drawing.Point(0, 276);
             this.BtnSaveSettings.Margin = new System.Windows.Forms.Padding(0);
             this.BtnSaveSettings.Name = "BtnSaveSettings";
             this.BtnSaveSettings.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
@@ -137,7 +156,7 @@
             this.BtnDeclineChanges.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BtnDeclineChanges.Image = global::RecipeLoader.Properties.Resources.DeclinePi;
             this.BtnDeclineChanges.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnDeclineChanges.Location = new System.Drawing.Point(0, 489);
+            this.BtnDeclineChanges.Location = new System.Drawing.Point(0, 357);
             this.BtnDeclineChanges.Margin = new System.Windows.Forms.Padding(0);
             this.BtnDeclineChanges.Name = "BtnDeclineChanges";
             this.BtnDeclineChanges.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
@@ -155,7 +174,7 @@
             this.BtnSettings.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BtnSettings.Image = global::RecipeLoader.Properties.Resources.SettingsPic;
             this.BtnSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSettings.Location = new System.Drawing.Point(0, 570);
+            this.BtnSettings.Location = new System.Drawing.Point(0, 438);
             this.BtnSettings.Margin = new System.Windows.Forms.Padding(0);
             this.BtnSettings.Name = "BtnSettings";
             this.BtnSettings.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
@@ -174,7 +193,7 @@
             this.Content.Location = new System.Drawing.Point(4, 4);
             this.Content.Margin = new System.Windows.Forms.Padding(4);
             this.Content.Name = "Content";
-            this.Content.Size = new System.Drawing.Size(795, 651);
+            this.Content.Size = new System.Drawing.Size(590, 519);
             this.Content.TabIndex = 1;
             // 
             // tableLayoutPanel1
@@ -189,16 +208,16 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 200F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(793, 649);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(588, 517);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // processControl1
             // 
             this.processControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.processControl1.Location = new System.Drawing.Point(4, 453);
+            this.processControl1.Location = new System.Drawing.Point(4, 321);
             this.processControl1.Margin = new System.Windows.Forms.Padding(4);
             this.processControl1.Name = "processControl1";
-            this.processControl1.Size = new System.Drawing.Size(785, 192);
+            this.processControl1.Size = new System.Drawing.Size(580, 192);
             this.processControl1.TabIndex = 1;
             // 
             // panel1
@@ -209,7 +228,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(787, 443);
+            this.panel1.Size = new System.Drawing.Size(582, 311);
             this.panel1.TabIndex = 2;
             // 
             // componentGrid1
@@ -219,7 +238,7 @@
             this.componentGrid1.Location = new System.Drawing.Point(0, 0);
             this.componentGrid1.Margin = new System.Windows.Forms.Padding(4);
             this.componentGrid1.Name = "componentGrid1";
-            this.componentGrid1.Size = new System.Drawing.Size(787, 443);
+            this.componentGrid1.Size = new System.Drawing.Size(582, 311);
             this.componentGrid1.TabIndex = 1;
             // 
             // settingsControl1
@@ -229,14 +248,14 @@
             this.settingsControl1.Location = new System.Drawing.Point(0, 0);
             this.settingsControl1.Name = "settingsControl1";
             this.settingsControl1.Settings = null;
-            this.settingsControl1.Size = new System.Drawing.Size(787, 443);
+            this.settingsControl1.Size = new System.Drawing.Size(582, 311);
             this.settingsControl1.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1023, 659);
+            this.ClientSize = new System.Drawing.Size(818, 527);
             this.Controls.Add(this.MainLayout);
             this.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -269,6 +288,7 @@
         private View.ComponentGrid componentGrid1;
         private SettingsControl settingsControl1;
         private System.Windows.Forms.Button BtnClearGrid;
+        private System.Windows.Forms.Button BtnRemoveRows;
     }
 }
 

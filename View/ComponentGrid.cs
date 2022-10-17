@@ -9,20 +9,21 @@ using System.Windows.Forms;
 
 namespace RecipeLoader.View
 {
-    public partial class ComponentGrid : UserControl
+    public partial class ComponentGrid : UserControl, INotifiable
     {
+        public event Action<string> Notify;
         public ComponentGrid()
         {
             InitializeComponent();
             initializeGrid();
             
         }
-        IList<LoadQueueComponent> comp { get; set; }
+        IBindingList comp { get; set; }
         void initializeGrid()
         {
             dataGridView1.AutoGenerateColumns = false;
-            comp = new List<LoadQueueComponent>();                                  
-            for (int i = 0; i < 100; i++)
+            comp = new BindingList<LoadQueueComponent>();                                  
+            for (int i = 0; i < 10; i++)
             {
                 comp.Add(new LoadQueueComponent() { IsOnLoadQueue = true, Len = 55, DownloadTime = DateTime.Now }) ;
             }
@@ -33,9 +34,15 @@ namespace RecipeLoader.View
             dataGridView1.Columns["DownloadTime"].DataPropertyName = nameof(LoadQueueComponent.DownloadTime);
             dataGridView1.Columns["FileName"].DataPropertyName = nameof(LoadQueueComponent.File);
         }
-        public bool getState()
+        public void ClearGrid()
+        {            
+            comp.Clear();            
+            dataGridView1.Refresh();
+            Notify?.Invoke("Список компонентов очищен");
+        }
+        public void RemoveSelectedRows()
         {
-            return comp[0].IsOnLoadQueue;
+            dataGridView1.Refresh();
         }
         public string Description { get; set; }        
         public class LoadQueueComponent : Component
@@ -43,5 +50,7 @@ namespace RecipeLoader.View
             public bool IsOnLoadQueue { get; set; }
             public DateTime DownloadTime { get; set; }
         }
+        
+
     }
 }

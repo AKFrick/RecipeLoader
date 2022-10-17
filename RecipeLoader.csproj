@@ -132,6 +132,7 @@
     <None Include="Resources\SavePic.png" />
     <None Include="Resources\DeclinePi.png" />
     <None Include="Resources\ClearPic.png" />
+    <None Include="Resources\RemoveRowPic.png" />
     <Content Include="иконка64х64.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

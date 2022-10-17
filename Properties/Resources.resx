@@ -130,6 +130,9 @@
   <data name="recipeloadericon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\recipeloadericon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="RemoveRowPic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RemoveRowPic.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="SavePic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SavePic.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

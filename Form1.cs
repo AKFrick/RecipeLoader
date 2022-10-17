@@ -23,15 +23,19 @@ namespace RecipeLoader
             BtnSaveSettings.Click += SaveSettings;
             BtnDeclineChanges.Click += DeclineChanges;
             BtnOpenRecipe.Click += OpenFileDialog;
+            BtnClearGrid.Click += ClearGrid;
+            BtnRemoveRows.Click += RemoveSelectedRows;
 
             Notify += (m) => processControl1.WriteLine(m);
 
             settingsControl1.Notify += Notify;
+            componentGrid1.Notify += Notify;
 
             FormClosing += Form1_FormClosing;
 
             loadSettings();
         }
+
         private void OpenFileDialog(object sender, EventArgs e)
         {             
             return;
@@ -76,7 +80,6 @@ namespace RecipeLoader
                 Notify?.Invoke(e.Message);
             }      
         }
-
 
         void loadToPlc(RecipeData recipe)
         {
@@ -126,6 +129,14 @@ namespace RecipeLoader
             ToolDictionaryLoader loader = new ToolDictionaryLoader();
             loader.Notify += Notify;
             return loader.Load();                
+        }
+        private void RemoveSelectedRows(object sender, EventArgs e)
+        {
+            componentGrid1.RemoveSelectedRows();
+        }
+        private void ClearGrid(object sender, EventArgs e)
+        {
+            componentGrid1.ClearGrid();
         }
         private void DeclineChanges(object sender, EventArgs e)
         {
