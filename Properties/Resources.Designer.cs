@@ -63,6 +63,16 @@ namespace RecipeLoader.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CheckPic {
+            get {
+                object obj = ResourceManager.GetObject("CheckPic", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ClearPic {
             get {
                 object obj = ResourceManager.GetObject("ClearPic", resourceCulture);
@@ -126,6 +136,16 @@ namespace RecipeLoader.Properties {
         internal static System.Drawing.Bitmap SettingsPic {
             get {
                 object obj = ResourceManager.GetObject("SettingsPic", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap UncheckPic {
+            get {
+                object obj = ResourceManager.GetObject("UncheckPic", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

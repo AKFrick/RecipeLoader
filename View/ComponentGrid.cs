@@ -15,42 +15,84 @@ namespace RecipeLoader.View
         public ComponentGrid()
         {
             InitializeComponent();
-            initializeGrid();
-            
+            initializeGrid();            
         }
-        IBindingList comp { get; set; }
+        IBindingList gridComponents { get; set; }
         void initializeGrid()
         {
             dataGridView1.AutoGenerateColumns = false;
-            comp = new BindingList<LoadQueueComponent>();                                  
-            for (int i = 0; i < 10; i++)
-            {
-                comp.Add(new LoadQueueComponent() { IsOnLoadQueue = true, Len = 55, DownloadTime = DateTime.Now }) ;
-            }
+            gridComponents = new BindingList<Component>();                                  
 
-            dataGridView1.DataSource = comp;
-            dataGridView1.Columns["IsOnLoadQueue"].DataPropertyName = nameof(LoadQueueComponent.IsOnLoadQueue);
+            dataGridView1.DataSource = gridComponents;
+            dataGridView1.Columns["IsOnLoadQueue"].DataPropertyName = nameof(Component.IsOnLoadQueue);
             dataGridView1.Columns["Len"].DataPropertyName = nameof(Component.Len);
-            dataGridView1.Columns["DownloadTime"].DataPropertyName = nameof(LoadQueueComponent.DownloadTime);
-            dataGridView1.Columns["FileName"].DataPropertyName = nameof(LoadQueueComponent.File);
+            dataGridView1.Columns["DownloadTime"].DataPropertyName = nameof(Component.DownloadTime);
+            dataGridView1.Columns["FileName"].DataPropertyName = nameof(Component.FileName);
+            dataGridView1.Columns["Number"].DataPropertyName = nameof(Component.Number);
+            dataGridView1.Columns["FrameSet"].DataPropertyName = nameof(Component.FrameSet);
+            dataGridView1.Columns["Direction"].DataPropertyName = nameof(Component.Direction);
+        }
+        public void AddComponents(List<Component> components)
+        {
+            foreach (Component component in components)
+                gridComponents.Add(component);
+            dataGridView1.Refresh();
         }
         public void ClearGrid()
         {            
-            comp.Clear();            
+            gridComponents.Clear();            
             dataGridView1.Refresh();
             Notify?.Invoke("Список компонентов очищен");
         }
         public void RemoveSelectedRows()
         {
             dataGridView1.Refresh();
-        }
-        public string Description { get; set; }        
-        public class LoadQueueComponent : Component
+        } 
+        public void CheckSelectedRows()
         {
-            public bool IsOnLoadQueue { get; set; }
-            public DateTime DownloadTime { get; set; }
+            if (!(dataGridView1.SelectedRows.Count == 0))
+            {
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                {                    
+                    ((Component)row.DataBoundItem).IsOnLoadQueue = true;
+                }
+            }
+            dataGridView1.Refresh();
         }
-        
+        public void UncheckSelectedRows()
+        {
+            if (!(dataGridView1.SelectedRows.Count == 0))
+            {
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                {                    
+                    ((Component)row.DataBoundItem).IsOnLoadQueue = false;
+                }
+            }
+            dataGridView1.Refresh();
+        }
+        Component componentToLoad;
+        DataGridViewRow rowToLoad;
+        public Component getNextComponent()
+        {
+            if (componentToLoad != null && rowToLoad != null)
+            {
+                componentToLoad.IsOnLoadQueue = false;
+                componentToLoad.DownloadTime = DateTime.Now;
+                rowToLoad.DefaultCellStyle.BackColor = Color.White;
+            }
+            dataGridView1.Refresh();
 
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if( ((Component)row.DataBoundItem).IsOnLoadQueue )
+                {                    
+                    row.DefaultCellStyle.BackColor = Color.GreenYellow;
+                    rowToLoad = row;
+                    componentToLoad = (Component)row.DataBoundItem;
+                    return (Component)((Component)row.DataBoundItem).Clone();
+                }
+            }
+            throw new Exception("Нет компонентов для загрузки");
+        }
     }
 }

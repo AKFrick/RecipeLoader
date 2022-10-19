@@ -32,7 +32,10 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.IsOnLoadQueue = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FrameSet = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Len = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Direction = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DownloadTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -59,7 +62,10 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IsOnLoadQueue,
             this.FileName,
+            this.FrameSet,
+            this.Number,
             this.Len,
+            this.Direction,
             this.DownloadTime});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
@@ -87,6 +93,20 @@
             this.FileName.ReadOnly = true;
             this.FileName.Width = 200;
             // 
+            // FrameSet
+            // 
+            this.FrameSet.HeaderText = "Сборка";
+            this.FrameSet.MinimumWidth = 6;
+            this.FrameSet.Name = "FrameSet";
+            this.FrameSet.Width = 200;
+            // 
+            // Number
+            // 
+            this.Number.HeaderText = "Номер";
+            this.Number.MinimumWidth = 6;
+            this.Number.Name = "Number";
+            this.Number.Width = 125;
+            // 
             // Len
             // 
             this.Len.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -95,6 +115,13 @@
             this.Len.Name = "Len";
             this.Len.ReadOnly = true;
             this.Len.Width = 150;
+            // 
+            // Direction
+            // 
+            this.Direction.HeaderText = "Направление";
+            this.Direction.MinimumWidth = 6;
+            this.Direction.Name = "Direction";
+            this.Direction.Width = 125;
             // 
             // DownloadTime
             // 
@@ -124,7 +151,10 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn IsOnLoadQueue;
         private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FrameSet;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Number;
         private System.Windows.Forms.DataGridViewTextBoxColumn Len;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Direction;
         private System.Windows.Forms.DataGridViewTextBoxColumn DownloadTime;
     }
 }

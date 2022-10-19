@@ -16,24 +16,24 @@ namespace RecipeLoader
             Value = value;
         }
     }
-    public class Component
+    public class Component : ICloneable
     {
-
-        public string File;
-        public List<ToolPosn> Tools;
+        public bool IsOnLoadQueue { get; set; }
+        public DateTime DownloadTime { get; set; }
+        public string FileName { get; set; }
+        public string FrameSet { get; set; }
+        public int Number { get; set; }
+        public bool Inverted { get; set; }
+        public string Direction { get; set; }
+        public List<ToolPosn> Tools { get; set; }
         public double Len { get; set; }
         public Component()
         {
             Tools = new List<ToolPosn>();
         }
-    }
-    public class RecipeData
-    {
-        public List<Component> Components { get; private set; }
-        public RecipeData()
+        public object Clone()
         {
-            Components = new List<Component>();
+            return MemberwiseClone();
         }
-
     }
 }

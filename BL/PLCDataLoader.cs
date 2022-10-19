@@ -38,15 +38,16 @@ namespace RecipeLoader
             this.settings = settings;
             component_Size = componentLen_Size + toolsTotal_Size + tool_Size * (settings.MaxToolsInComponent);
         }
-        public void LoadAsStruct(RecipeData recipe)
-        {            
+        public void LoadComponent(Component component)
+        {
+
         }
 
-        public void LoadRecipe(RecipeData recipe)
+        public void LoadRecipe(List<Component> recipe)
         {
             Notify?.Invoke("Загрузка рецепта в ПЛК...");
             int i = 0;
-            if (recipe.Components.Count > settings.MaxNumberOfComponents) throw new Exception($"Количество строк в рецепте - {recipe.Components.Count} больше, " +
+            if (recipe.Count > settings.MaxNumberOfComponents) throw new Exception($"Количество строк в рецепте - {recipe.Count} больше, " +
                                                                                 $"чем количество строк в массиве ПЛК - {settings.MaxNumberOfComponents}");
 
             using (plc = new Plc(settings.CpuType, settings.Ip, settings.CpuRack, settings.CpuSlot))
@@ -59,7 +60,7 @@ namespace RecipeLoader
                 }
                 else
                 {
-                    foreach (var line in recipe.Components)
+                    foreach (var line in recipe)
                     {
                         int j = 0;
                         foreach (var item in line.Tools)
@@ -132,23 +133,23 @@ namespace RecipeLoader
         string getToolNumAddress(int componentNum, int toolNum)
             => $"DB{ settings.DBNum}.DBW{ components_Offset + componentNum * component_Size + tools_Offset + toolNum * tool_Size + toolNum_Offset}";
 
-        int getToolNumValue(RecipeData recipe, int componentNum, int toolNum)
-            => recipe.Components.ElementAt(componentNum).Tools.ElementAt(toolNum).Tool;
+        int getToolNumValue(List<Component> recipe, int componentNum, int toolNum)
+            => recipe.ElementAt(componentNum).Tools.ElementAt(toolNum).Tool;
 
         string getToolPosnAddress(int componentNum, int toolNum)
             => $"DB{settings.DBNum}.DBD{getToolPosnOffset(componentNum, toolNum)}";
         int getToolPosnOffset(int componentNum, int toolNum)
             => components_Offset + componentNum * component_Size + tools_Offset + toolNum * tool_Size + toolPosn_Offset;
 
-        double getToolPosnValue(RecipeData recipe, int componentNum, int toolNum)
-            => recipe.Components.ElementAt(componentNum).Tools.ElementAt(toolNum).Value;        
+        double getToolPosnValue(List<Component> recipe, int componentNum, int toolNum)
+            => recipe.ElementAt(componentNum).Tools.ElementAt(toolNum).Value;        
 
         string getComponentLenAddress(int componentNum)
             => $"DB{settings.DBNum}.DBD{getComponentLenOffset(componentNum)}";
         int getComponentLenOffset(int componentNum)
             => components_Offset + component_Size * componentNum + componentLen_Offset;
-        double getComponentLenValue(RecipeData recipe, int componentNum)
-                => recipe.Components.ElementAt(componentNum).Len;
+        double getComponentLenValue(List<Component> recipe, int componentNum)
+                => recipe.ElementAt(componentNum).Len;
         string getToolTotalAddress(int componentNum)
             => $"DB{settings.DBNum}.DBW{components_Offset + component_Size * componentNum + toolsTotal_Offset}";
 

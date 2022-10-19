@@ -23,8 +23,10 @@ namespace RecipeLoader
             BtnSaveSettings.Click += SaveSettings;
             BtnDeclineChanges.Click += DeclineChanges;
             BtnOpenRecipe.Click += OpenFileDialog;
-            BtnClearGrid.Click += ClearGrid;
-            BtnRemoveRows.Click += RemoveSelectedRows;
+            BtnClearGrid.Click += (s, e) => componentGrid1.ClearGrid();
+            BtnRemoveRows.Click += TestGet; //(s, e) => componentGrid1.RemoveSelectedRows();
+            BtnCheckToLoad.Click += (s,e) => componentGrid1.CheckSelectedRows();
+            BtnUncheckToLoad.Click += (s, e) => componentGrid1.UncheckSelectedRows();
 
             Notify += (m) => processControl1.WriteLine(m);
 
@@ -38,11 +40,11 @@ namespace RecipeLoader
 
         private void OpenFileDialog(object sender, EventArgs e)
         {             
-            return;
             OpenFileDialog openFileDialog1 = new OpenFileDialog
             {
                 Title = "Выберите файл рецепта",
 
+                Multiselect = true,
                 CheckFileExists = true,
                 CheckPathExists = true,
 
@@ -57,31 +59,36 @@ namespace RecipeLoader
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {                
-                ParseFile(openFileDialog1.FileName);
+                Notify?.Invoke("***********************************************************");
+                try
+                {
+                    ToolDictionary tools = loadTools();
+                    RecipeParser parser = new RecipeParser(tools);
+                    parser.Notify += Notify;
+                    List<Component> recipe = parser.ParseFiles(openFileDialog1.FileNames);
+                    componentGrid1.AddComponents(recipe);
+                }
+                catch (Exception ex)
+                {
+                    Notify?.Invoke(ex.Message);
+                }
             }
         }
-        void ParseFile(string filename)
+        private void TestGet(object sender, EventArgs e)
+        {            
+           Notify?.Invoke(componentGrid1.getNextComponent().Len.ToString());
+            
+        }
+
+        void ThreadLoadToPLC()
         {
-            Notify?.Invoke("***********************************************************");
-            try
-            {
-                ToolDictionary tools = loadTools();
-                RecipeParser parser = new RecipeParser(tools);
-                parser.Notify += Notify;
-                RecipeData recipe = parser.Parse(filename);
-
-                BtnOpenRecipe.Enabled = false;
-                Thread thread = new Thread(() => loadToPlc(recipe));
-                thread.IsBackground = true;
-                thread.Start();
-            }
-            catch (Exception e)
-            {
-                Notify?.Invoke(e.Message);
-            }      
+            BtnOpenRecipe.Enabled = false;
+           // Thread thread = new Thread(() => loadToPlc(recipe));
+           // thread.IsBackground = true;
+           // thread.Start();
         }
 
-        void loadToPlc(RecipeData recipe)
+        void loadToPlc(List<Component> recipe)
         {
             try
             {
@@ -130,14 +137,6 @@ namespace RecipeLoader
             loader.Notify += Notify;
             return loader.Load();                
         }
-        private void RemoveSelectedRows(object sender, EventArgs e)
-        {
-            componentGrid1.RemoveSelectedRows();
-        }
-        private void ClearGrid(object sender, EventArgs e)
-        {
-            componentGrid1.ClearGrid();
-        }
         private void DeclineChanges(object sender, EventArgs e)
         {
             HideSettings();
@@ -160,6 +159,8 @@ namespace RecipeLoader
             settingsControl1.Visible = true;
             componentGrid1.Visible = false;
             BtnSettings.Visible = false;
+            BtnClearGrid.Visible = false;
+            BtnRemoveRows.Visible = false;
             BtnSaveSettings.Visible = true;
             BtnDeclineChanges.Visible = true;
 
@@ -170,6 +171,8 @@ namespace RecipeLoader
             settingsControl1.Visible = false;
             componentGrid1.Visible = true;
             BtnSettings.Visible = true;
+            BtnClearGrid.Visible = true;
+            BtnRemoveRows.Visible = true;
             BtnSaveSettings.Visible = false;
             BtnDeclineChanges.Visible = false;
         }
