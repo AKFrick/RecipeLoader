@@ -78,10 +78,10 @@
             // 
             // IsOnLoadQueue
             // 
-            this.IsOnLoadQueue.HeaderText = "В очереди на загрузку";
+            this.IsOnLoadQueue.HeaderText = "Загрузить?";
             this.IsOnLoadQueue.MinimumWidth = 6;
             this.IsOnLoadQueue.Name = "IsOnLoadQueue";
-            this.IsOnLoadQueue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.IsOnLoadQueue.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.IsOnLoadQueue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.IsOnLoadQueue.Width = 125;
             // 
@@ -98,6 +98,8 @@
             this.FrameSet.HeaderText = "Сборка";
             this.FrameSet.MinimumWidth = 6;
             this.FrameSet.Name = "FrameSet";
+            this.FrameSet.ReadOnly = true;
+            this.FrameSet.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.FrameSet.Width = 200;
             // 
             // Number
@@ -105,6 +107,8 @@
             this.Number.HeaderText = "Номер";
             this.Number.MinimumWidth = 6;
             this.Number.Name = "Number";
+            this.Number.ReadOnly = true;
+            this.Number.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Number.Width = 125;
             // 
             // Len
@@ -114,6 +118,7 @@
             this.Len.MinimumWidth = 6;
             this.Len.Name = "Len";
             this.Len.ReadOnly = true;
+            this.Len.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Len.Width = 150;
             // 
             // Direction
@@ -121,6 +126,8 @@
             this.Direction.HeaderText = "Направление";
             this.Direction.MinimumWidth = 6;
             this.Direction.Name = "Direction";
+            this.Direction.ReadOnly = true;
+            this.Direction.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Direction.Width = 125;
             // 
             // DownloadTime
@@ -129,6 +136,7 @@
             this.DownloadTime.MinimumWidth = 6;
             this.DownloadTime.Name = "DownloadTime";
             this.DownloadTime.ReadOnly = true;
+            this.DownloadTime.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.DownloadTime.Width = 175;
             // 
             // ComponentGrid

@@ -15,6 +15,7 @@ namespace RecipeLoader
     {
         AppSettingsLoader settingsLoader;
         ToolDictionary tools;
+        System.Threading.Timer plcLoadTimer;
         public Form1()
         {            
             InitializeComponent();
@@ -23,8 +24,8 @@ namespace RecipeLoader
             BtnSaveSettings.Click += SaveSettings;
             BtnDeclineChanges.Click += DeclineChanges;
             BtnOpenRecipe.Click += OpenFileDialog;
-            BtnClearGrid.Click += (s, e) => componentGrid1.ClearGrid();
-            BtnRemoveRows.Click += TestGet; //(s, e) => componentGrid1.RemoveSelectedRows();
+            BtnClearGrid.Click += (s, e) =>  componentGrid1.ClearGrid();
+            BtnRemoveRows.Click += (s, e) => componentGrid1.RemoveSelectedRows(); 
             BtnCheckToLoad.Click += (s,e) => componentGrid1.CheckSelectedRows();
             BtnUncheckToLoad.Click += (s, e) => componentGrid1.UncheckSelectedRows();
 
@@ -36,6 +37,7 @@ namespace RecipeLoader
             FormClosing += Form1_FormClosing;
 
             loadSettings();
+            TestTimer();
         }
 
         private void OpenFileDialog(object sender, EventArgs e)
@@ -74,18 +76,28 @@ namespace RecipeLoader
                 }
             }
         }
-        private void TestGet(object sender, EventArgs e)
-        {            
-           Notify?.Invoke(componentGrid1.getNextComponent().Len.ToString());
-            
-        }
-
         void ThreadLoadToPLC()
         {
             BtnOpenRecipe.Enabled = false;
            // Thread thread = new Thread(() => loadToPlc(recipe));
            // thread.IsBackground = true;
            // thread.Start();
+        }
+        void TestTimer()
+        {
+            var autoEvent = new AutoResetEvent(false);
+            plcLoadTimer = new System.Threading.Timer(GetComp, autoEvent, 2000, 250);            
+        }
+        public void GetComp(Object stateInfo)
+        {
+            try
+            {
+                Notify?.Invoke(componentGrid1.GetNextComponent().Number.ToString());
+            }
+            catch (Exception ex)
+            {
+                Notify?.Invoke(ex.Message);
+            }
         }
 
         void loadToPlc(List<Component> recipe)

@@ -30,7 +30,7 @@ namespace RecipeLoader.View
             dataGridView1.Columns["FileName"].DataPropertyName = nameof(Component.FileName);
             dataGridView1.Columns["Number"].DataPropertyName = nameof(Component.Number);
             dataGridView1.Columns["FrameSet"].DataPropertyName = nameof(Component.FrameSet);
-            dataGridView1.Columns["Direction"].DataPropertyName = nameof(Component.Direction);
+            dataGridView1.Columns["Direction"].DataPropertyName = nameof(Component.Direction);            
         }
         public void AddComponents(List<Component> components)
         {
@@ -46,6 +46,8 @@ namespace RecipeLoader.View
         }
         public void RemoveSelectedRows()
         {
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                dataGridView1.Rows.Remove(row);
             dataGridView1.Refresh();
         } 
         public void CheckSelectedRows()
@@ -72,7 +74,18 @@ namespace RecipeLoader.View
         }
         Component componentToLoad;
         DataGridViewRow rowToLoad;
-        public Component getNextComponent()
+        public Component GetNextComponent()
+        {
+            if(dataGridView1.InvokeRequired)
+            {
+                return (Component)dataGridView1.Invoke(
+                    new Func<Component>(() => getNextComponent())
+                    );
+            }
+            else
+                return getNextComponent();
+        }
+        Component getNextComponent()
         {
             if (componentToLoad != null && rowToLoad != null)
             {
@@ -80,19 +93,19 @@ namespace RecipeLoader.View
                 componentToLoad.DownloadTime = DateTime.Now;
                 rowToLoad.DefaultCellStyle.BackColor = Color.White;
             }
-            dataGridView1.Refresh();
 
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                if( ((Component)row.DataBoundItem).IsOnLoadQueue )
-                {                    
+                if (((Component)row.DataBoundItem).IsOnLoadQueue)
+                {
                     row.DefaultCellStyle.BackColor = Color.GreenYellow;
                     rowToLoad = row;
                     componentToLoad = (Component)row.DataBoundItem;
                     return (Component)((Component)row.DataBoundItem).Clone();
                 }
             }
+            //return new Component() { Number = 1000 };
             throw new Exception("Нет компонентов для загрузки");
-        }
+        }        
     }
 }
