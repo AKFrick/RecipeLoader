@@ -98,7 +98,7 @@
             this.BtnUncheckToLoad.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.BtnUncheckToLoad.Size = new System.Drawing.Size(212, 81);
             this.BtnUncheckToLoad.TabIndex = 5;
-            this.BtnUncheckToLoad.Text = "Снять";
+            this.BtnUncheckToLoad.Text = "Снять загрузку";
             this.BtnUncheckToLoad.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnUncheckToLoad.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BtnUncheckToLoad.UseVisualStyleBackColor = true;
@@ -115,7 +115,7 @@
             this.BtnCheckToLoad.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.BtnCheckToLoad.Size = new System.Drawing.Size(212, 81);
             this.BtnCheckToLoad.TabIndex = 6;
-            this.BtnCheckToLoad.Text = "Отметить";
+            this.BtnCheckToLoad.Text = "Отметить загрузку";
             this.BtnCheckToLoad.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnCheckToLoad.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BtnCheckToLoad.UseVisualStyleBackColor = true;
@@ -254,6 +254,7 @@
             this.processControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.processControl1.Location = new System.Drawing.Point(4, 565);
             this.processControl1.Margin = new System.Windows.Forms.Padding(4);
+            this.processControl1.MaxLines = 200;
             this.processControl1.Name = "processControl1";
             this.processControl1.Size = new System.Drawing.Size(694, 192);
             this.processControl1.TabIndex = 1;
