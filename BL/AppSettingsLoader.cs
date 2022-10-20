@@ -91,6 +91,7 @@ namespace RecipeLoader
         public short CpuRack { get; set; }  = 0;
         public short CpuSlot { get; set; } = 1;
         public bool EnableLogSystemMsg = false;
+        public int FrameSetLen = 25;
     }
 
     public class AppSettingsLoader : INotifiable

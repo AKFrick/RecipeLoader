@@ -74,7 +74,7 @@ namespace RecipeLoader.View
         }
         Component componentToLoad;
         DataGridViewRow rowToLoad;
-        public Component GetNextComponent()
+        public Component GetNextComponentTS()
         {
             if(dataGridView1.InvokeRequired)
             {
@@ -85,14 +85,20 @@ namespace RecipeLoader.View
             else
                 return getNextComponent();
         }
+        public void LoadSucceedTS(DateTime LoadTime)
+        {
+            if (dataGridView1.InvokeRequired)
+            {
+                Action action = () => loadSucceed(LoadTime);
+                dataGridView1.Invoke(action);
+            }
+            else
+                loadSucceed(LoadTime);
+        }
         Component getNextComponent()
         {
-            if (componentToLoad != null && rowToLoad != null)
-            {
-                componentToLoad.IsOnLoadQueue = false;
-                componentToLoad.DownloadTime = DateTime.Now;
+            if (rowToLoad != null)
                 rowToLoad.DefaultCellStyle.BackColor = Color.White;
-            }
 
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
@@ -106,6 +112,15 @@ namespace RecipeLoader.View
             }
             //return new Component() { Number = 1000 };
             throw new Exception("Нет компонентов для загрузки");
-        }        
+        }   
+        void loadSucceed(DateTime LoadTime)
+        {
+            if (componentToLoad != null)
+            {
+                componentToLoad.IsOnLoadQueue = false;
+                componentToLoad.DownloadTime = LoadTime;
+                dataGridView1.Refresh();
+            }
+        }
     }
 }

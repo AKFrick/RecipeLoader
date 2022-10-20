@@ -14,7 +14,6 @@ namespace RecipeLoader
     public partial class Form1 : Form, INotifiable
     {
         AppSettingsLoader settingsLoader;
-        ToolDictionary tools;
         System.Threading.Timer plcLoadTimer;
         public Form1()
         {            
@@ -29,6 +28,8 @@ namespace RecipeLoader
             BtnCheckToLoad.Click += (s,e) => componentGrid1.CheckSelectedRows();
             BtnUncheckToLoad.Click += (s, e) => componentGrid1.UncheckSelectedRows();
 
+            btnTestLoadPLC.Click += TestLoadPLC;
+
             Notify += (m) => processControl1.WriteLine(m);
 
             settingsControl1.Notify += Notify;
@@ -37,9 +38,24 @@ namespace RecipeLoader
             FormClosing += Form1_FormClosing;
 
             loadSettings();
-            TestTimer();
+            //TestTimer();
         }
 
+        void TestLoadPLC(object sender, EventArgs e)
+        {
+            PlcLoader plcLoader = new PlcLoader(settingsLoader.Settings.Plc);
+            plcLoader.Notify += Notify;
+            try
+            {
+                plcLoader.LoadComponent(componentGrid1.GetNextComponentTS());
+                componentGrid1.LoadSucceedTS(DateTime.Now);
+            }
+            catch (Exception ex)
+            {
+                Notify?.Invoke(ex.Message);
+            }
+           
+        }
         private void OpenFileDialog(object sender, EventArgs e)
         {             
             OpenFileDialog openFileDialog1 = new OpenFileDialog
@@ -86,27 +102,27 @@ namespace RecipeLoader
         void TestTimer()
         {
             var autoEvent = new AutoResetEvent(false);
-            plcLoadTimer = new System.Threading.Timer(GetComp, autoEvent, 2000, 250);            
+            plcLoadTimer = new System.Threading.Timer(GetComp, autoEvent, 2000, 5000);            
         }
         public void GetComp(Object stateInfo)
         {
             try
             {
-                Notify?.Invoke(componentGrid1.GetNextComponent().Number.ToString());
+                componentGrid1.GetNextComponentTS();
+                componentGrid1.LoadSucceedTS(DateTime.Now);
             }
             catch (Exception ex)
             {
                 Notify?.Invoke(ex.Message);
             }
         }
-
         void loadToPlc(List<Component> recipe)
         {
             try
             {
-                PLCDataLoader recipeLoader = new PLCDataLoader(settingsLoader.Settings.Plc);
-                recipeLoader.Notify += Notify;
-                recipeLoader.LoadRecipe(recipe);
+                //PLCDataLoader recipeLoader = new PLCDataLoader(settingsLoader.Settings.Plc);
+                //recipeLoader.Notify += Notify;
+                //recipeLoader.LoadRecipe(recipe);
             }
             catch (Exception e)
             {
@@ -121,6 +137,10 @@ namespace RecipeLoader
                     }));
             }
         }
+
+
+
+
         public event Action<string> Notify;
         void loadSettings()
         {

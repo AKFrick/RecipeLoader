@@ -75,8 +75,8 @@ namespace RecipeLoader
                                                                         $"Write tool posn: {getToolPosnAddress(i, j)} " +
                                                                         $"Value: {getToolPosnValue(recipe, i, j)}");
 
-                                plc.Write(getToolNumAddress(i, j), getToolNumValue(recipe, i, j));                                
-                                plc.WriteDouble(int.Parse(settings.DBNum), getToolPosnOffset(i,j), getToolPosnValue(recipe, i, j));
+                                plc.Write(getToolNumAddress(i, j), getToolNumValue(recipe, i, j));
+                                plc.WriteDouble(int.Parse(settings.DBNum), getToolPosnOffset(i, j), getToolPosnValue(recipe, i, j));
                                 j++;
                             }
                         }
@@ -142,7 +142,7 @@ namespace RecipeLoader
             => components_Offset + componentNum * component_Size + tools_Offset + toolNum * tool_Size + toolPosn_Offset;
 
         double getToolPosnValue(List<Component> recipe, int componentNum, int toolNum)
-            => recipe.ElementAt(componentNum).Tools.ElementAt(toolNum).Value;        
+            => recipe.ElementAt(componentNum).Tools.ElementAt(toolNum).Value;
 
         string getComponentLenAddress(int componentNum)
             => $"DB{settings.DBNum}.DBD{getComponentLenOffset(componentNum)}";
@@ -154,15 +154,7 @@ namespace RecipeLoader
             => $"DB{settings.DBNum}.DBW{components_Offset + component_Size * componentNum + toolsTotal_Offset}";
 
         string getComponentsTotalAddress()
-            => $"DB{settings.DBNum}.DBW{componentsTotal_Offset}";       
-            
-    }
-    static class PlcExt
-    {
-        public static void WriteDouble(this Plc plc, int db, int offset, double value)
-        {
-            plc.WriteBytes(DataType.DataBlock, db, offset, S7.Net.Types.Double.ToByteArray(value));
-        }
+            => $"DB{settings.DBNum}.DBW{componentsTotal_Offset}";
 
     }
 }
