@@ -147,7 +147,7 @@ namespace RecipeLoader
                     plc.WriteDouble(int.Parse(settings.DBNum), getComponentLenOffset(), component.Len);
                     plc.Write(getComponentNumberAddress(), component.Number);
                     
-                    string frameSet = $"{component.FrameSet} {component.Number}";                                        
+                    string frameSet = $"{component.FrameSet}/{component.Number}";                                        
                     plc.WriteString(int.Parse(settings.DBNum), getFrameSetOffset(), settings.FrameSetLen, frameSet);
 
                     plc.Write(getInvDirectionAddress(), component.Inverted);

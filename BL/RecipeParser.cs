@@ -64,9 +64,17 @@ namespace RecipeLoader
                 }
                 else
                 {
+                    try
+                    {
+                        string[] str = lines[2].Split(',').Skip(1).ToArray();
+                        frameSet = string.Join("/", str);                        
+                    }
+                    catch (Exception ex)
+                    {
+                        Notify?.Invoke($"Ошибка в рецепте. Неверный формат FrameSet");
+                        throw new Exception("Рецепт имеет неверный формат");
+                    }
 
-                    frameSet = lines[2];
-                    
                 }
                 data = new List<Component>();
 
