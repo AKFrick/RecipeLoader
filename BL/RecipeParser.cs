@@ -64,15 +64,9 @@ namespace RecipeLoader
                 }
                 else
                 {
-                    if(lines[2].Length > 20)
-                    {
-                        Notify?.Invoke($"Ошибка в рецепте. Строка № 3");
-                        throw new Exception("Рецепт имеет неверный формат");
-                    }
-                    else
-                    {
-                        frameSet = lines[2];
-                    }
+
+                    frameSet = lines[2];
+                    
                 }
                 data = new List<Component>();
 
@@ -119,7 +113,7 @@ namespace RecipeLoader
             catch { throw new Exception($"Ошибка в длине детали"); }
 
             try { resultLine.Inverted = parseStateInverted(substr[2]); }
-            catch { throw new Exception($"Ошибка в длине детали"); }
+            catch { throw new Exception($"Ошибка параметре направления"); }
             resultLine.Direction = stringDirection(resultLine.Inverted);
 
             for (int i = 5; i < substr.Length; i+=2)

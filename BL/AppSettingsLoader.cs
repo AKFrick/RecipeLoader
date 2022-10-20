@@ -17,6 +17,7 @@ namespace RecipeLoader
         public int FormWidth = 400; 
         public System.Drawing.Point FormLocation = new System.Drawing.Point(0,0);
         public string AppDirectory;
+        public int OutputMaxLines = 200;
 
         public string RecipeSearchFilter = "xls files (*.xls)|*.xls|csv files (*.csv)|*.csv";
         public object Clone()
@@ -92,6 +93,7 @@ namespace RecipeLoader
         public short CpuSlot { get; set; } = 1;
         public bool EnableLogSystemMsg = false;
         public int FrameSetLen = 25;
+        public int PlcRequestPeriod = 5000; //Отправляем запрос на загрузку в ПЛК
     }
 
     public class AppSettingsLoader : INotifiable

@@ -109,7 +109,7 @@
             this.Number.Name = "Number";
             this.Number.ReadOnly = true;
             this.Number.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Number.Width = 125;
+            this.Number.Width = 75;
             // 
             // Len
             // 
@@ -119,7 +119,7 @@
             this.Len.Name = "Len";
             this.Len.ReadOnly = true;
             this.Len.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Len.Width = 150;
+            this.Len.Width = 125;
             // 
             // Direction
             // 

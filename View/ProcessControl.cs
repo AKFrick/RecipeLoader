@@ -11,28 +11,33 @@ namespace RecipeLoader
 {
     public partial class ProcessControl : UserControl
     {
-        int maxLines = 10;
+        public int MaxLines { get; set; } = 200;
         public ProcessControl()
         {
-            InitializeComponent();                  
+            InitializeComponent(); 
+
         }
-        public void WriteLine(string line)
+
+        public void WriteLineTS(string line)
         {
-            //Потокобезопасная запись в текстбокс.
-            if(tbOutput.InvokeRequired)
+            if (tbOutput.InvokeRequired)
             {
-                Action safeWrite = delegate
-                {
-                    tbOutput.AppendText($"{DateTime.Now}: {line} \r\n");
-                    tbOutput.ScrollToCaret();
-                };
-                tbOutput.Invoke(safeWrite);
+                Action action = () => WriteLine(line);
+                tbOutput.Invoke(action);
             }
             else
+                WriteLine(line);                      
+        }
+        void WriteLine(string line)
+        {     
+            if(tbOutput.Lines.Length > MaxLines * 2)
             {
-                tbOutput.AppendText($"{DateTime.Now}: {line} \r\n");
-                tbOutput.ScrollToCaret();
-            }            
+                var lines = tbOutput.Lines;
+                var newLines = lines.Skip(MaxLines);
+                tbOutput.Lines = newLines.ToArray();
+            }
+            tbOutput.AppendText($"{DateTime.Now}: {line} \r\n");
+            tbOutput.ScrollToCaret();
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using S7;
 using S7.Net;
+using System.Threading;
 
 namespace RecipeLoader
 {
@@ -13,6 +14,13 @@ namespace RecipeLoader
         PlcSettings settings;
         Plc plc;
         ErrorCode connectionResult;
+        Timer plcLoadTimer;
+
+        public delegate Component GetNextComponent();
+        public delegate void ComponentLoaded(DateTime dateTime);
+
+        GetNextComponent getNext;
+        ComponentLoaded reportLoaded;
 
         int component_Offset = 2; //Офсет структуры компонента
         int componentLen_Offset = 0; //От начала структуры компонента
@@ -28,13 +36,48 @@ namespace RecipeLoader
         int toolPosn_Size = 4;
         int tool_Size = 6;
 
+        int TimerStartDeley = 2000;
+
         string componentLoaded_Offset = "DBX0.1";
         string LoadQuery_Offset = "DBX0.0";
 
-        public PlcLoader(PlcSettings settings)
+        public class PlcException : Exception 
         {
-            this.settings = settings;            
+            public PlcException(string message) : base(message) { }            
         }        
+
+        public PlcLoader(PlcSettings settings, GetNextComponent GetNext, ComponentLoaded ReportLoad)
+        {
+            this.settings = settings;
+
+            getNext = GetNext;  
+            reportLoaded = ReportLoad;
+
+            
+        }
+        public void StartLoader()
+        {
+            var autoEvent = new AutoResetEvent(false);
+            plcLoadTimer = new Timer(LoadComponentJob, autoEvent, TimerStartDeley, settings.PlcRequestPeriod);
+        }
+
+        public void LoadComponentJob(object stateInfo)
+        {
+            try
+            {                                  
+                LoadComponent(getNext());
+                reportLoaded(DateTime.Now);
+            }
+            catch (PlcException ex)
+            {
+                Notify?.Invoke(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                if (settings.EnableLogSystemMsg) Notify?.Invoke(ex.Message);
+            }
+        }
+
         public void LoadComponent(Component component)
         {            
             using (plc = new Plc(settings.CpuType, settings.Ip, settings.CpuRack, settings.CpuSlot))
@@ -43,17 +86,20 @@ namespace RecipeLoader
 
                 if (!plc.IsConnected)
                 {
-                    throw new Exception($"Не удалось подключиться к ПЛК по адресу {settings.Ip}: {connectionResult}");
+                    throw new PlcException($"Не удалось подключиться к ПЛК по адресу {settings.Ip}: {connectionResult}");
                 }
                 else
                 {
                     //Проверим, можно ли загружать компонент
-                    if (settings.EnableLogSystemMsg) Notify($"Считываем бит LoadQuery: {getLoadQueryAddress()}");
+                    if (settings.EnableLogSystemMsg) Notify?.Invoke($"Считываем бит LoadQuery и ComponentLoaded: " +
+                                                            $"{getLoadQueryAddress()} " +
+                                                            $"{getComponentLoadedAddress()} "
+                                                            );
 
-                    if (!(bool)plc.Read(getLoadQueryAddress()))
+                    if (!(bool)plc.Read(getLoadQueryAddress()) 
+                        || (bool)plc.Read(getComponentLoadedAddress()) )
                     {
-                        if (settings.EnableLogSystemMsg) Notify("Загрузка не разрешена");
-                        return; 
+                        throw new Exception($"Нет разрешение на загрузку от ПЛК");
                     }
 
 
@@ -64,7 +110,7 @@ namespace RecipeLoader
                     //Запишем список инструментов
                     for(; i < component.Tools.Count ; i++)
                     {                                                                        
-                        if (settings.EnableLogSystemMsg) Notify($"Write tool num: {getToolNumAddress(i)} " +
+                        if (settings.EnableLogSystemMsg) Notify?.Invoke($"Write tool num: {getToolNumAddress(i)} " +
                                                                 $"Value: {getToolNumValue(component, i)}, " +
                                                                 $"Write tool posn: {getToolPosnAddress(i)} " +
                                                                 $"Value: {getToolPosnValue(component, i)}");
@@ -76,7 +122,7 @@ namespace RecipeLoader
                     //Обнулям незаполненные инструменты
                     for (; i < settings.MaxToolsInComponent; i++)
                     {
-                        if (settings.EnableLogSystemMsg) Notify($"Reset toolNum: {getToolNumAddress(i)}, " +
+                        if (settings.EnableLogSystemMsg) Notify?.Invoke($"Reset toolNum: {getToolNumAddress(i)}, " +
                                                                 $"toolPosn: {getToolPosnAddress(i)} " +
                                                                 $"to 0");
                         plc.Write(getToolNumAddress(i), 0);
@@ -84,7 +130,7 @@ namespace RecipeLoader
                     }
 
                     //Запишем остальные данные компонента
-                    if (settings.EnableLogSystemMsg) Notify($"Write Component len: {getComponentLenAddress()} " +
+                    if (settings.EnableLogSystemMsg) Notify?.Invoke($"Write Component len: {getComponentLenAddress()} " +
                                                             $"Value: {component.Len} //" +
                                                             $"Write Component Number " +
                                                             $"Value: {component.Number} //" +

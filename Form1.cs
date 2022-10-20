@@ -7,30 +7,27 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
-using S7.Net;
 
 namespace RecipeLoader
 {
     public partial class Form1 : Form, INotifiable
     {
         AppSettingsLoader settingsLoader;
-        System.Threading.Timer plcLoadTimer;
+        PlcLoader plcLoader;
         public Form1()
         {            
-            InitializeComponent();
+            InitializeComponent();            
 
             BtnSettings.Click += ShowSettings;
             BtnSaveSettings.Click += SaveSettings;
             BtnDeclineChanges.Click += DeclineChanges;
             BtnOpenRecipe.Click += OpenFileDialog;
-            BtnClearGrid.Click += (s, e) =>  componentGrid1.ClearGrid();
-            BtnRemoveRows.Click += (s, e) => componentGrid1.RemoveSelectedRows(); 
+            BtnClearGrid.Click += ClearGrid;
+            BtnRemoveRows.Click += RemoveSelectedRows;
             BtnCheckToLoad.Click += (s,e) => componentGrid1.CheckSelectedRows();
             BtnUncheckToLoad.Click += (s, e) => componentGrid1.UncheckSelectedRows();
 
-            btnTestLoadPLC.Click += TestLoadPLC;
-
-            Notify += (m) => processControl1.WriteLine(m);
+            Notify += (m) => processControl1.WriteLineTS(m);
 
             settingsControl1.Notify += Notify;
             componentGrid1.Notify += Notify;
@@ -38,23 +35,11 @@ namespace RecipeLoader
             FormClosing += Form1_FormClosing;
 
             loadSettings();
-            //TestTimer();
-        }
+            processControl1.MaxLines = settingsLoader.Settings.OutputMaxLines;
 
-        void TestLoadPLC(object sender, EventArgs e)
-        {
-            PlcLoader plcLoader = new PlcLoader(settingsLoader.Settings.Plc);
+            plcLoader = new PlcLoader(settingsLoader.Settings.Plc, componentGrid1.GetNextComponentTS, componentGrid1.LoadSucceedTS);
             plcLoader.Notify += Notify;
-            try
-            {
-                plcLoader.LoadComponent(componentGrid1.GetNextComponentTS());
-                componentGrid1.LoadSucceedTS(DateTime.Now);
-            }
-            catch (Exception ex)
-            {
-                Notify?.Invoke(ex.Message);
-            }
-           
+            plcLoader.StartLoader();
         }
         private void OpenFileDialog(object sender, EventArgs e)
         {             
@@ -92,54 +77,6 @@ namespace RecipeLoader
                 }
             }
         }
-        void ThreadLoadToPLC()
-        {
-            BtnOpenRecipe.Enabled = false;
-           // Thread thread = new Thread(() => loadToPlc(recipe));
-           // thread.IsBackground = true;
-           // thread.Start();
-        }
-        void TestTimer()
-        {
-            var autoEvent = new AutoResetEvent(false);
-            plcLoadTimer = new System.Threading.Timer(GetComp, autoEvent, 2000, 5000);            
-        }
-        public void GetComp(Object stateInfo)
-        {
-            try
-            {
-                componentGrid1.GetNextComponentTS();
-                componentGrid1.LoadSucceedTS(DateTime.Now);
-            }
-            catch (Exception ex)
-            {
-                Notify?.Invoke(ex.Message);
-            }
-        }
-        void loadToPlc(List<Component> recipe)
-        {
-            try
-            {
-                //PLCDataLoader recipeLoader = new PLCDataLoader(settingsLoader.Settings.Plc);
-                //recipeLoader.Notify += Notify;
-                //recipeLoader.LoadRecipe(recipe);
-            }
-            catch (Exception e)
-            {
-                Notify?.Invoke(e.Message);
-            }
-            finally
-            {
-                Invoke(new Action(() =>
-                    {
-                        BtnOpenRecipe.Enabled = true;
-                        Notify?.Invoke("***********************************************************");
-                    }));
-            }
-        }
-
-
-
 
         public event Action<string> Notify;
         void loadSettings()
@@ -185,6 +122,7 @@ namespace RecipeLoader
             {
                 Notify?.Invoke(ex.Message);
             }
+
         }
         private void ShowSettings(object sender, EventArgs e)
         {           
@@ -211,6 +149,27 @@ namespace RecipeLoader
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             settingsLoader.SaveFormDim(Height, Width, Location, Environment.CurrentDirectory);
+        }
+
+        private void RemoveSelectedRows(object sender, EventArgs e)
+        {
+            var confirmResult = MessageBox.Show("Удалить выделенные строки?",
+                                                "",
+                                                    MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                componentGrid1.RemoveSelectedRows();
+            }
+        }
+        private void ClearGrid(object sender, EventArgs e)
+        {
+            var confirmResult = MessageBox.Show("Очистить таблицу?",
+                                    "",
+                                        MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                componentGrid1.ClearGrid();
+            }
         }
     }
 }

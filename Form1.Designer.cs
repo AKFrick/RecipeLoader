@@ -45,7 +45,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.componentGrid1 = new RecipeLoader.View.ComponentGrid();
             this.settingsControl1 = new RecipeLoader.SettingsControl();
-            this.btnTestLoadPLC = new System.Windows.Forms.Button();
             this.MainLayout.SuspendLayout();
             this.LeftBar.SuspendLayout();
             this.Content.SuspendLayout();
@@ -72,7 +71,6 @@
             // LeftBar
             // 
             this.LeftBar.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.LeftBar.Controls.Add(this.btnTestLoadPLC);
             this.LeftBar.Controls.Add(this.BtnUncheckToLoad);
             this.LeftBar.Controls.Add(this.BtnCheckToLoad);
             this.LeftBar.Controls.Add(this.BtnRemoveRows);
@@ -290,23 +288,6 @@
             this.settingsControl1.Size = new System.Drawing.Size(696, 555);
             this.settingsControl1.TabIndex = 0;
             // 
-            // btnTestLoadPLC
-            // 
-            this.btnTestLoadPLC.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnTestLoadPLC.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnTestLoadPLC.Image = global::RecipeLoader.Properties.Resources.UncheckPic;
-            this.btnTestLoadPLC.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTestLoadPLC.Location = new System.Drawing.Point(0, 243);
-            this.btnTestLoadPLC.Margin = new System.Windows.Forms.Padding(4);
-            this.btnTestLoadPLC.Name = "btnTestLoadPLC";
-            this.btnTestLoadPLC.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnTestLoadPLC.Size = new System.Drawing.Size(212, 81);
-            this.btnTestLoadPLC.TabIndex = 7;
-            this.btnTestLoadPLC.Text = "Загрузка ПЛК";
-            this.btnTestLoadPLC.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTestLoadPLC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnTestLoadPLC.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
@@ -347,7 +328,6 @@
         private System.Windows.Forms.Button BtnRemoveRows;
         private System.Windows.Forms.Button BtnCheckToLoad;
         private System.Windows.Forms.Button BtnUncheckToLoad;
-        private System.Windows.Forms.Button btnTestLoadPLC;
     }
 }
 
